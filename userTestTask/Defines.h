@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 ARC. All rights reserved.
 //
 
-#ifndef userTestTask_Defines_h
-#define userTestTask_Defines_h
+#define SYSTEM_FONT [UIFont systemFontOfSize:17.0f]
+#define CUSTOM_FONT [UIFont fontWithName:@"RegencieLight" size:17.0f]
 
-
-#endif
+#define kFirstRun @"firstRun"
+#define isFirstRun ![[NSUserDefaults standardUserDefaults] boolForKey:kFirstRun]

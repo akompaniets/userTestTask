@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserData.h"
 
 @interface UserDetailViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UITextField *nameField;
+@property (weak, nonatomic) IBOutlet UITextField *userNameField;
+@property (weak, nonatomic) IBOutlet UITextField *userPhoneField;
+
+@property (strong, nonatomic) UserData *currentUser;
 
 @end

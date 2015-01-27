@@ -8,16 +8,21 @@
 
 #import "UserCell.h"
 
+@interface UserCell()
+
+@property (weak, nonatomic) IBOutlet UIImageView *cellBackground;
+
+@end
+
 @implementation UserCell
 
 - (void)awakeFromNib {
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    self.backgroundColor = [UIColor clearColor];
+    self.name.font = self.userName.font = self.userPhone.font = SYSTEM_FONT;
+    
+    self.backgroundView.opaque = YES;
+    self.cellBackground.image = [[UIImage imageNamed:@"cell_bg"] stretchableImageWithLeftCapWidth:8 topCapHeight:8];
+    
 }
 
 @end

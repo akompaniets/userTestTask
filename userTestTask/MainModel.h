@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AFNetworking/AFNetworking.h>
 
 @interface MainModel : NSObject
+
+- (void)fetchUsersWithCompletion:(void(^)(BOOL success))block;
 
 @end

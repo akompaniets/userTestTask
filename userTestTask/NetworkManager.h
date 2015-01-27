@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AFNetworking/AFNetworking.h>
 
-@interface NetworkManager : NSObject
+@interface NetworkManager : AFHTTPRequestOperationManager
+
+- (void)fetchUserDataWithCompletion:(void(^)(NSArray *array, NSError *error))block;
 
 @end

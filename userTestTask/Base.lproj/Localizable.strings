@@ -5,3 +5,14 @@
   Created by Andrey Kompaniets on 10.12.14.
   Copyright (c) 2014 ARC. All rights reserved.
 */
+"user_list" = "User List";
+"add_new_user" = "Add new user";
+"loading" = "Loading...";
+"reg_form_title" = "New User Registration";
+"registration_successful" = "Registration Successful";
+"success" = "Success!";
+"user_updated" = "User info has been updated.";
+"error" = "Error!";
+"error_internet_connection" = "Check please network connection.";
+"fill_all_fields" = "You should fill all of fields.";
+"error_getting_current_location" = "Error getting current location";
