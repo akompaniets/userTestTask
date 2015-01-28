@@ -16,7 +16,7 @@
 @property(strong, nonatomic) NetworkManager *networkManager;
 @property(strong, nonatomic) CoreDataManager *coreDataManager;
 @property(strong, nonatomic) NSManagedObjectContext *moc;
-@property(strong, nonatomic) NSArray *fetchedAllUsers;
+@property(strong, nonatomic) NSSet *userIDs;
 
 @end
 
@@ -46,10 +46,13 @@
         }
         
         [self.networkManager fetchUserDataWithCompletion:^(NSArray *array, NSError *error) {
-            self.fetchedAllUsers = [self fetchAllUsersFromDatabase];
+            self.userIDs = [self fetchAllUsersID];
+            
+            
             if (array)
             {
-                if ([array count] != [self.fetchedAllUsers count]) {
+                NSInteger count = [array count];
+                if (count != [self.userIDs count]) {
                     [self handleFetchedData:array];
                 }
                 
@@ -69,7 +72,7 @@
 
 - (void)handleFetchedData:(NSArray *)data
 {
-    int usersCount = [self.fetchedAllUsers count];
+    NSInteger usersCount = [self.userIDs count];
         
     if (!usersCount) {
         for (NSDictionary *dict in data)
@@ -79,15 +82,9 @@
     }
     else
     {
-        NSMutableSet *usersID = [[NSMutableSet alloc] init];
-        for (UserData *currentUser in self.fetchedAllUsers)
-        {
-            [usersID addObject:currentUser.userID];
-        }
-        
         for (NSDictionary *dict in data)
         {
-            if (![usersID containsObject:[dict objectForKey:@"id"]])
+            if (![self.userIDs containsObject:[dict objectForKey:@"id"]])
             {
                 [self handleUserDictionary:dict];
             }
@@ -117,24 +114,27 @@
     user.lng = [NSNumber numberWithFloat:[[dict valueForKeyPath:@"address.geo.lng"] floatValue]];
 }
 
-- (NSArray *) fetchAllUsersFromDatabase
+- (NSSet *) fetchAllUsersID
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *description = [NSEntityDescription entityForName:@"UserData" inManagedObjectContext:self.moc];
-   
-    NSSortDescriptor *sortDesc = [[NSSortDescriptor alloc] initWithKey:@"userID" ascending:YES];
     [request setEntity:description];
-    [request setSortDescriptors:@[sortDesc]];
     
     NSError *error = nil;
     NSArray *fetchedArray = [self.moc executeFetchRequest:request error:&error];
+    
+    NSMutableSet *temp = [[NSMutableSet alloc] init];
+    for (UserData *currentUser in fetchedArray)
+    {
+        [temp addObject:currentUser.userID];
+    }
     
     if (error) {
 #ifdef DEBUG
         NSLog(@"Erro fetching: %@", [error userInfo]);
 #endif
     }
-    return fetchedArray;
+    return [temp copy];
 }
 
 
