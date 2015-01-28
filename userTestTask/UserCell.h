@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserData.h"
 
 @interface UserCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userPhone;
+
+- (void) configureCellWithObject:(UserData *)currentUser;
 
 @end

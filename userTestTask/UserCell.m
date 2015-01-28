@@ -25,4 +25,11 @@
     
 }
 
+- (void) configureCellWithObject:(UserData *)currentUser
+{
+    self.name.text = currentUser.name;
+    self.userName.text = currentUser.userName;
+    self.userPhone.text = currentUser.phone;
+}
+
 @end

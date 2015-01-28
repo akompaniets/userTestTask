@@ -105,9 +105,7 @@
 {
     UserCell *userCell = (UserCell *)cell;
     UserData *currentUser = [self.fetchedResultsController fetchedObjects][indexPath.row];
-    userCell.name.text = currentUser.name;
-    userCell.userName.text = currentUser.userName;
-    userCell.userPhone.text = currentUser.phone;
+    [userCell configureCellWithObject:currentUser];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
