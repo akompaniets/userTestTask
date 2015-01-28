@@ -16,6 +16,7 @@
 @property(strong, nonatomic) NetworkManager *networkManager;
 @property(strong, nonatomic) CoreDataManager *coreDataManager;
 @property(strong, nonatomic) NSManagedObjectContext *moc;
+@property(strong, nonatomic) NSArray *fetchedAllUsers;
 
 @end
 
@@ -44,10 +45,16 @@
             self.coreDataManager = [CoreDataManager sharedManager];
         }
         
+        
+        
         [self.networkManager fetchUserDataWithCompletion:^(NSArray *array, NSError *error) {
-            if (array )
+            self.fetchedAllUsers = [self fetchAllUsersFromDatabase];
+            if (array)
             {
-                [self handleFetchedData:array];
+                if ([array count] != [self.fetchedAllUsers count]) {
+                    [self handleFetchedData:array];
+                }
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     block(YES);
                 });
@@ -64,16 +71,35 @@
 
 - (void)handleFetchedData:(NSArray *)data
 {
-    for (NSDictionary *dict in data) {
-        UserData *user = [NSEntityDescription insertNewObjectForEntityForName:@"UserData"
-                                                       inManagedObjectContext:self.moc];
-        user.name = [dict objectForKey:@"name"];
-        user.phone = [dict objectForKey:@"phone"];
-        user.userName = [dict objectForKey:@"username"];
-        user.lat = [NSNumber numberWithFloat:[[dict valueForKeyPath:@"address.geo.lat"] floatValue]];
-        user.lng = [NSNumber numberWithFloat:[[dict valueForKeyPath:@"address.geo.lng"] floatValue]];
-        
+    int usersCount = [self.fetchedAllUsers count];
+    
+    if (!usersCount) {
+        for (NSDictionary *dict in data) {
+            UserData *user = [NSEntityDescription insertNewObjectForEntityForName:@"UserData"
+                                                           inManagedObjectContext:self.moc];
+            user.name = [dict objectForKey:@"name"];
+            user.phone = [dict objectForKey:@"phone"];
+            user.userName = [dict objectForKey:@"username"];
+            user.userID = [NSNumber numberWithInteger:[[dict valueForKey:@"id"] integerValue]];
+            user.lat = [NSNumber numberWithFloat:[[dict valueForKeyPath:@"address.geo.lat"] floatValue]];
+            user.lng = [NSNumber numberWithFloat:[[dict valueForKeyPath:@"address.geo.lng"] floatValue]];
+            
+        }
     }
+    else
+    {
+        for (NSDictionary *dict in data)
+        {
+            for (UserData *currentUser in self.fetchedAllUsers)
+            {
+                if (![currentUser.userID isEqual:[dict objectForKey:@"id"]])
+                {
+                    [self handleUserDictionary:dict];
+                }
+            }
+        }
+    }
+    
     [self.moc performBlockAndWait:^{
         NSError *error = nil;
         if (![self.moc save:&error])
@@ -83,6 +109,36 @@
     }];
     [[CoreDataManager sharedManager] saveContext];
     
+}
+
+- (void) handleUserDictionary:(NSDictionary *)dict
+{
+    UserData *user = [NSEntityDescription insertNewObjectForEntityForName:@"UserData"
+                                                   inManagedObjectContext:self.moc];
+    user.name = [dict objectForKey:@"name"];
+    user.phone = [dict objectForKey:@"phone"];
+    user.userName = [dict objectForKey:@"username"];
+    user.userID = [NSNumber numberWithInteger:[[dict valueForKey:@"id"] integerValue]];
+    user.lat = [NSNumber numberWithFloat:[[dict valueForKeyPath:@"address.geo.lat"] floatValue]];
+    user.lng = [NSNumber numberWithFloat:[[dict valueForKeyPath:@"address.geo.lng"] floatValue]];
+}
+
+- (NSArray *) fetchAllUsersFromDatabase
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *description = [NSEntityDescription entityForName:@"UserData" inManagedObjectContext:self.moc];
+    NSSortDescriptor *sortDesc = [[NSSortDescriptor alloc] initWithKey:@"userID" ascending:YES];
+    [request setEntity:description];
+    [request setSortDescriptors:@[sortDesc]];
+    
+    NSError *error = nil;
+    NSArray *fetchedArray = [self.moc executeFetchRequest:request error:&error];
+    if (error) {
+#ifdef DEBUG
+        NSLog(@"Erro fetching: %@", [error userInfo]);
+#endif
+    }
+    return fetchedArray;
 }
 
 

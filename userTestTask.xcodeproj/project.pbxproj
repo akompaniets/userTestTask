@@ -24,10 +24,10 @@
 		49E874741A38B08000E2A1C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49E874761A38B08000E2A1C8 /* Localizable.strings */; };
 		49E8747A1A38BC4E00E2A1C8 /* MainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E874791A38BC4E00E2A1C8 /* MainModel.m */; };
 		49E8747D1A38BCFB00E2A1C8 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E8747C1A38BCFB00E2A1C8 /* NetworkManager.m */; };
-		49E874811A38C91D00E2A1C8 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E874801A38C91D00E2A1C8 /* UserData.m */; };
 		49FD04021A45D345007732F9 /* LaunchImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FD04011A45D345007732F9 /* LaunchImage.xib */; };
 		49FD04051A45E268007732F9 /* UserAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FD04041A45E268007732F9 /* UserAnnotation.m */; };
 		72D277522B4CB991D1AA40DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D4FB30CA8D123E081486CD /* libPods.a */; };
+		DF5B89CC1A790B2700404450 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = DF5B89CB1A790B2700404450 /* UserData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,12 +76,12 @@
 		49E874791A38BC4E00E2A1C8 /* MainModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainModel.m; sourceTree = "<group>"; };
 		49E8747B1A38BCFB00E2A1C8 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		49E8747C1A38BCFB00E2A1C8 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
-		49E8747F1A38C91D00E2A1C8 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
-		49E874801A38C91D00E2A1C8 /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
 		49FD04011A45D345007732F9 /* LaunchImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchImage.xib; sourceTree = "<group>"; };
 		49FD04031A45E268007732F9 /* UserAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAnnotation.h; sourceTree = "<group>"; };
 		49FD04041A45E268007732F9 /* UserAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAnnotation.m; sourceTree = "<group>"; };
 		5837DA240FFA3A4D944EB485 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		DF5B89CA1A790B2700404450 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
+		DF5B89CB1A790B2700404450 /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,10 +229,10 @@
 		49E8747E1A38C8F600E2A1C8 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				49E8747F1A38C91D00E2A1C8 /* UserData.h */,
-				49E874801A38C91D00E2A1C8 /* UserData.m */,
 				49E874681A38898A00E2A1C8 /* CoreDataManager.h */,
 				49E874691A38898A00E2A1C8 /* CoreDataManager.m */,
+				DF5B89CA1A790B2700404450 /* UserData.h */,
+				DF5B89CB1A790B2700404450 /* UserData.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -396,8 +396,8 @@
 				49E874451A3864E200E2A1C8 /* MainViewController.m in Sources */,
 				49E874641A387B0D00E2A1C8 /* UserDetailViewController.m in Sources */,
 				49E8747D1A38BCFB00E2A1C8 /* NetworkManager.m in Sources */,
+				DF5B89CC1A790B2700404450 /* UserData.m in Sources */,
 				49E8743C1A3864E200E2A1C8 /* main.m in Sources */,
-				49E874811A38C91D00E2A1C8 /* UserData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,8 +522,8 @@
 			baseConfigurationReference = 14377C89294D10724476A42B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Kompaniets (MT836QR9K3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Kompaniets (MT836QR9K3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = userTestTask/PrefixHeader.pch;
@@ -531,7 +531,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Users;
-				PROVISIONING_PROFILE = "82d4e779-d893-4d06-b99e-a9edd3c3491f";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -540,8 +540,8 @@
 			baseConfigurationReference = 5837DA240FFA3A4D944EB485 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Kompaniets (MT836QR9K3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Kompaniets (MT836QR9K3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = userTestTask/PrefixHeader.pch;
@@ -549,7 +549,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Users;
-				PROVISIONING_PROFILE = "82d4e779-d893-4d06-b99e-a9edd3c3491f";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

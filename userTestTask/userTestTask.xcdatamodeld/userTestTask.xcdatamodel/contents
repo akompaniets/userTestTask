@@ -5,9 +5,10 @@
         <attribute name="lng" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="UserData" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="UserData" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

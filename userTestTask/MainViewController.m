@@ -15,6 +15,7 @@
 #import "MainModel.h"
 #import "CoreDataManager.h"
 #import <RKDropdownAlert/RKDropdownAlert.h>
+#import <SVPullToRefresh/SVPullToRefresh.h>
 
 
 @interface MainViewController () <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
@@ -35,6 +36,12 @@
     [super viewDidLoad];
     self.title = NSLocalizedString(@"user_list", nil);
     self.tableView.backgroundColor = [UIColor clearColor];
+   
+    __weak typeof(self) weakSelf = self;
+    
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf fetchUsersData];
+    }];
     
     self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     self.hud.textLabel.text = NSLocalizedString(@"loading", nil);
@@ -65,6 +72,7 @@
         if (success)
         {
             [self.hud dismissAnimated:YES];
+            [self.tableView.pullToRefreshView stopAnimating];
         }
         else
         {
@@ -168,7 +176,7 @@
 
     [fetchRequest setFetchBatchSize:10];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userID"
                                                                    ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
     
