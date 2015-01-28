@@ -46,16 +46,29 @@
         }
         
         [self.networkManager fetchUserDataWithCompletion:^(NSArray *array, NSError *error) {
-            self.userIDs = [self fetchAllUsersID];
-            
+            if (!isFirstRun)
+            {
+                 self.userIDs = [self fetchAllUsersID];
+            }
+           
+            NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+                if ([evaluatedObject isEqualToNumber:[NSNumber numberWithInteger:0]])
+                {
+                    return NO;
+                }
+                else
+                {
+                    return YES;
+                }
+            }];
+            NSSet *filteredSet = [self.userIDs filteredSetUsingPredicate:predicate];
             
             if (array)
             {
-                NSInteger count = [array count];
-                if (count != [self.userIDs count]) {
+                if ([array count] != [filteredSet count])
+                {
                     [self handleFetchedData:array];
                 }
-                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     block(YES);
                 });
@@ -91,14 +104,18 @@
         }
     }
     
-    [self.moc performBlockAndWait:^{
-        NSError *error = nil;
-        if (![self.moc save:&error])
-        {
-            NSLog(@"Error saving context -- %@", [error userInfo]);
-        }
-    }];
-    [[CoreDataManager sharedManager] saveContext];
+    if ([self.moc hasChanges])
+    {
+        [self.moc performBlockAndWait:^{
+            NSError *error = nil;
+            if (![self.moc save:&error])
+            {
+                NSLog(@"Error saving context -- %@", [error userInfo]);
+            }
+        }];
+        [[CoreDataManager sharedManager] saveContext];
+    }
+    
     
 }
 
@@ -117,8 +134,10 @@
 - (NSSet *) fetchAllUsersID
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userID != 0"];
     NSEntityDescription *description = [NSEntityDescription entityForName:@"UserData" inManagedObjectContext:self.moc];
     [request setEntity:description];
+    [request setPredicate:predicate];
     
     NSError *error = nil;
     NSArray *fetchedArray = [self.moc executeFetchRequest:request error:&error];

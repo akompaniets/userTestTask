@@ -106,6 +106,7 @@
         user.phone = self.phoneNumberField.text;
         user.lat = self.lat;
         user.lng = self.lng;
+        user.userID = [NSNumber numberWithInteger:0];
         
         [moc performBlockAndWait:^{
             NSError *error;

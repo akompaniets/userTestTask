@@ -77,6 +77,7 @@
         else
         {
             [self.hud dismissAnimated:YES];
+            [self.tableView.pullToRefreshView startAnimating];
             [RKDropdownAlert title:NSLocalizedString(@"error", nil)
                            message:NSLocalizedString(@"error_internet_connection", nil)
                    backgroundColor:[UIColor redColor]
@@ -129,12 +130,6 @@
         }
     }
 }
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-}
-
 
 #pragma mark - Segue
 

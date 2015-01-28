@@ -51,7 +51,7 @@
     
     self.cancelButton.hidden = YES;
     
-    self.nameField.enabled = self.userNameField.enabled = self.userPhoneField.enabled = NO;
+//    self.nameField.enabled = self.userNameField.enabled = self.userPhoneField.enabled = NO;
     
     [self addTargetForTextField:self.nameField];
     [self addTargetForTextField:self.userNameField];
@@ -212,6 +212,13 @@
         default:
             break;
     }
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    
 }
 
 @end

@@ -30,6 +30,7 @@
     self.name.text = currentUser.name;
     self.userName.text = currentUser.userName;
     self.userPhone.text = currentUser.phone;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 @end
