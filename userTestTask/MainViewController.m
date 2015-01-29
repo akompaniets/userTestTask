@@ -48,9 +48,6 @@
     
     if (isFirstRun)
     {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFirstRun];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
         [self fetchUsersData];
     }
 }
@@ -116,18 +113,10 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-        
-        NSError *error = nil;
-        if (![context save:&error])
-        {
-#if DEBUG
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-#endif
-            abort();
-        }
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [self.managedObjectContext deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+        [[CoreDataManager sharedManager] saveContext];
     }
 }
 
@@ -140,7 +129,6 @@
         UserDetailViewController *detailVC = segue.destinationViewController;
         UserData *user = [self.fetchedResultsController fetchedObjects][[self.tableView indexPathForSelectedRow].row];
         detailVC.currentUser = user;
-        
     }
 }
 

@@ -116,7 +116,7 @@
             if ([managedObjectContext save:&error])
             {
 #if DEBUG
-                NSLog(@"Main context Saved!");
+                NSLog(@"Main Context Saved!");
 #endif
             }
         }];
@@ -127,7 +127,7 @@
         if ([self.writerContext save:&error])
         {
 #if DEBUG
-            NSLog(@"Writer Context saved!");
+            NSLog(@"Writer Context Saved!");
 #endif
         };
     }];

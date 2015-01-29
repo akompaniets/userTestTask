@@ -13,7 +13,7 @@
 #import <RKDropdownAlert/RKDropdownAlert.h>
 
 
-@interface UserDetailViewController () <UITextFieldDelegate>
+@interface UserDetailViewController () <UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *userDetailView;
 @property (weak, nonatomic) IBOutlet UIImageView *userViewBackground;
@@ -51,8 +51,6 @@
     
     self.cancelButton.hidden = YES;
     
-//    self.nameField.enabled = self.userNameField.enabled = self.userPhoneField.enabled = NO;
-    
     [self addTargetForTextField:self.nameField];
     [self addTargetForTextField:self.userNameField];
     [self addTargetForTextField:self.userPhoneField];
@@ -75,7 +73,6 @@
         [self.mapView addAnnotation:userAnnotation];
         [self.mapView setCenterCoordinate:coord animated:YES];
     }
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -129,7 +126,6 @@
         [self.editSaveButton setTitle:@"Save" forState:UIControlStateNormal];
         isEditing = YES;
         self.cancelButton.hidden = NO;
-        self.nameField.enabled = self.userNameField.enabled = self.userPhoneField.enabled = YES;
         [self.nameField becomeFirstResponder];
     }else
     {
@@ -159,7 +155,6 @@
                    backgroundColor:[UIColor greenColor]
                          textColor:[UIColor whiteColor]];
         }
-        
     }
 }
 
@@ -177,7 +172,6 @@
 - (void) cancellationAction
 {
     self.cancelButton.hidden = YES;
-    self.nameField.enabled = self.userNameField.enabled = self.userPhoneField.enabled = NO;
 
     [self.nameField resignFirstResponder];
     [self.userNameField resignFirstResponder];
@@ -188,15 +182,23 @@
 
 - (IBAction)deleteUser:(UIButton *)sender
 {
-    [[CoreDataManager sharedManager].mainContext deleteObject:self.currentUser];
-    if ([[CoreDataManager sharedManager] saveContext])
-    {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+    UIAlertView *deleteAlert = [[UIAlertView alloc] initWithTitle:@"Warning!"
+                                                          message:@"Do you really want to delete the user?"
+                                                         delegate:self
+                                                cancelButtonTitle:@"No"
+                                                otherButtonTitles:@"Yes", nil];
+    [deleteAlert show];
 }
 
 - (void) textFieldDidChange:(UITextField *)textField
 {
+    if (!isEditing)
+    {
+        isEditing = YES;
+        [self.editSaveButton setTitle:@"Save" forState:UIControlStateNormal];
+        self.cancelButton.hidden = NO;
+    }
+    
     switch (textField.tag)
     {
         case 11:
@@ -214,11 +216,25 @@
     }
 }
 
-#pragma mark - UITextFieldDelegate
+#pragma mark - UIAlertViewDelegate
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
+    switch (buttonIndex) {
+        case 1:
+        {
+            [[CoreDataManager sharedManager].mainContext deleteObject:self.currentUser];
+            if ([[CoreDataManager sharedManager] saveContext])
+            {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
+
 
 @end

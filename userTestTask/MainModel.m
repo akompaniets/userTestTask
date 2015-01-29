@@ -45,23 +45,31 @@
             self.coreDataManager = [CoreDataManager sharedManager];
         }
         
+        if (isFirstRun)
+        {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFirstRun];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
         [self.networkManager fetchUserDataWithCompletion:^(NSArray *array, NSError *error) {
+            
+            NSSet *filteredSet;
+           
             if (!isFirstRun)
             {
-                 self.userIDs = [self fetchAllUsersID];
+                self.userIDs = [self fetchAllUsersID];
+                NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+                    if ([evaluatedObject isEqualToNumber:[NSNumber numberWithInteger:0]])
+                    {
+                        return NO;
+                    }
+                    else
+                    {
+                        return YES;
+                    }
+                }];
+                filteredSet = [self.userIDs filteredSetUsingPredicate:predicate];
             }
-           
-            NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-                if ([evaluatedObject isEqualToNumber:[NSNumber numberWithInteger:0]])
-                {
-                    return NO;
-                }
-                else
-                {
-                    return YES;
-                }
-            }];
-            NSSet *filteredSet = [self.userIDs filteredSetUsingPredicate:predicate];
             
             if (array)
             {
@@ -115,8 +123,6 @@
         }];
         [[CoreDataManager sharedManager] saveContext];
     }
-    
-    
 }
 
 - (void) handleUserDictionary:(NSDictionary *)dict
@@ -138,14 +144,16 @@
     NSEntityDescription *description = [NSEntityDescription entityForName:@"UserData" inManagedObjectContext:self.moc];
     [request setEntity:description];
     [request setPredicate:predicate];
+    [request setResultType:NSDictionaryResultType];
+    [request setPropertiesToFetch:@[@"userID"]];
     
     NSError *error = nil;
     NSArray *fetchedArray = [self.moc executeFetchRequest:request error:&error];
     
     NSMutableSet *temp = [[NSMutableSet alloc] init];
-    for (UserData *currentUser in fetchedArray)
+    for (NSDictionary *currentUser in fetchedArray)
     {
-        [temp addObject:currentUser.userID];
+        [temp addObject:[currentUser objectForKey:@"userID"]];
     }
     
     if (error) {
