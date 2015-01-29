@@ -9,8 +9,6 @@
 #import "NetworkManager.h"
 #import "CoreDataManager.h"
 
-NSString * const url = @"http://jsonplaceholder.typicode.com/users";
-
 @interface NetworkManager()
 
 @end

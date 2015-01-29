@@ -59,7 +59,7 @@
             {
                 self.userIDs = [self fetchAllUsersID];
                 NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-                    if ([evaluatedObject isEqualToNumber:[NSNumber numberWithInteger:0]])
+                    if ([evaluatedObject isEqualToNumber:[NSNumber numberWithInteger:defaultUserID]])
                     {
                         return NO;
                     }
@@ -140,7 +140,7 @@
 - (NSSet *) fetchAllUsersID
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userID != 0"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userID != %d", defaultUserID];
     NSEntityDescription *description = [NSEntityDescription entityForName:@"UserData" inManagedObjectContext:self.moc];
     [request setEntity:description];
     [request setPredicate:predicate];
@@ -182,7 +182,7 @@
         newUser.phone = [user objectForKey:@"phone"];;
         newUser.lat = [user objectForKey:@"lat"];;
         newUser.lng = [user objectForKey:@"lng"];;
-        newUser.userID = [NSNumber numberWithInteger:0];
+        newUser.userID = [NSNumber numberWithInteger:defaultUserID];
         
         [moc performBlockAndWait:^{
             NSError *error;

@@ -6,9 +6,13 @@
 //  Copyright (c) 2014 ARC. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 #define SYSTEM_FONT [UIFont systemFontOfSize:17.0f]
 #define CUSTOM_FONT [UIFont fontWithName:@"RegencieLight" size:17.0f]
 
 #define kFirstRun @"firstRun"
 #define isFirstRun ![[NSUserDefaults standardUserDefaults] boolForKey:kFirstRun]
 
+FOUNDATION_EXPORT NSString *url;
+FOUNDATION_EXPORT NSInteger defaultUserID;
