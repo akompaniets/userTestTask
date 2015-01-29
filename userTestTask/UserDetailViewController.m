@@ -11,6 +11,7 @@
 #import "CoreDataManager.h"
 #import "UserAnnotation.h"
 #import <RKDropdownAlert/RKDropdownAlert.h>
+#import "MainModel.h"
 
 
 @interface UserDetailViewController () <UIAlertViewDelegate>
@@ -24,6 +25,7 @@
 @property (strong, nonatomic) NSString *tempName;
 @property (strong, nonatomic) NSString *tempUserName;
 @property (strong, nonatomic) NSString *tempPhone;
+@property (strong, nonatomic) MainModel *model;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *userViewTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapViewTopConstraint;
@@ -44,6 +46,8 @@
     [super viewDidLoad];
     self.userViewBackground.image = [[UIImage imageNamed:@"cell_bg"] stretchableImageWithLeftCapWidth:8 topCapHeight:8];
     self.mapView.layer.cornerRadius = 5.0f;
+    
+    self.model = [MainModel new];
     
     self.nameField.text = self.currentUser.name;
     self.userNameField.text = self.currentUser.userName;
@@ -146,10 +150,8 @@
         
         [self cancellationAction];
         
-        if ([[CoreDataManager sharedManager].mainContext hasChanges])
+        if ([self.model commitChangesForUser:self.currentUser])
         {
-            [[CoreDataManager sharedManager] saveContext];
-            
             [RKDropdownAlert title:NSLocalizedString(@"success", nil)
                            message:NSLocalizedString(@"user_updated", nil)
                    backgroundColor:[UIColor greenColor]
@@ -223,8 +225,7 @@
     switch (buttonIndex) {
         case 1:
         {
-            [[CoreDataManager sharedManager].mainContext deleteObject:self.currentUser];
-            if ([[CoreDataManager sharedManager] saveContext])
+            if ([self.model deleteUser:self.currentUser])
             {
                 [self.navigationController popViewControllerAnimated:YES];
             }

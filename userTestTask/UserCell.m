@@ -16,17 +16,13 @@
 
 @implementation UserCell
 
-- (void)awakeFromNib {
+- (void) configureCellWithObject:(UserData *)currentUser
+{
     self.backgroundColor = [UIColor clearColor];
     self.name.font = self.userName.font = self.userPhone.font = SYSTEM_FONT;
-    
     self.backgroundView.opaque = YES;
     self.cellBackground.image = [[UIImage imageNamed:@"cell_bg"] stretchableImageWithLeftCapWidth:8 topCapHeight:8];
     
-}
-
-- (void) configureCellWithObject:(UserData *)currentUser
-{
     self.name.text = currentUser.name;
     self.userName.text = currentUser.userName;
     self.userPhone.text = currentUser.phone;

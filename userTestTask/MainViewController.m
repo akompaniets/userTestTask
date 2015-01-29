@@ -220,11 +220,6 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
-    
-//    if ([[[self.fetchedResultsController sections] objectAtIndex:0] numberOfObjects]== 0)
-//    {
-//        [self fetchUsersData];
-//    }
 }
 
 @end

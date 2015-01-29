@@ -164,5 +164,64 @@
     return [temp copy];
 }
 
+#pragma mark - User Managing
+
+- (BOOL)createNewUserWithDictionary:(NSDictionary *)user
+{
+    __block BOOL result;
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        
+        NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        moc.parentContext = [[CoreDataManager sharedManager] mainContext];
+        
+        UserData *newUser = [NSEntityDescription insertNewObjectForEntityForName:@"UserData" inManagedObjectContext:moc];
+        newUser.name = [user objectForKey:@"name"];
+        newUser.userName = [user objectForKey:@"userName"];;
+        newUser.phone = [user objectForKey:@"phone"];;
+        newUser.lat = [user objectForKey:@"lat"];;
+        newUser.lng = [user objectForKey:@"lng"];;
+        newUser.userID = [NSNumber numberWithInteger:0];
+        
+        [moc performBlockAndWait:^{
+            NSError *error;
+            [moc save:&error];
+            if (error)
+            {
+#if DEBUG
+                NSLog(@"Saving error - %@", [error userInfo]);
+#endif
+            }
+        }];
+        
+        if ([[CoreDataManager sharedManager].mainContext hasChanges])
+        {
+            result = [[CoreDataManager sharedManager] saveContext] ? YES : NO;
+            
+        }
+    });
+    
+    return result;
+
+}
+
+- (BOOL)commitChangesForUser:(UserData *)user
+{
+    BOOL result;
+    if ([[CoreDataManager sharedManager].mainContext hasChanges])
+    {
+       result = [[CoreDataManager sharedManager] saveContext];
+    }
+    
+    return result;
+}
+
+- (BOOL)deleteUser:(UserData *)user
+{
+    [[CoreDataManager sharedManager].mainContext deleteObject:user];
+
+    return [[CoreDataManager sharedManager] saveContext];
+}
 
 @end

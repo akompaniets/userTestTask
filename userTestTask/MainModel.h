@@ -9,8 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
 
+@class UserData;
+
 @interface MainModel : NSObject
 
 - (void)fetchUsersWithCompletion:(void(^)(BOOL success))block;
+- (BOOL)createNewUserWithDictionary:(NSDictionary *)user;
+- (BOOL)commitChangesForUser:(UserData *)user;
+- (BOOL)deleteUser:(UserData *)user;
 
 @end

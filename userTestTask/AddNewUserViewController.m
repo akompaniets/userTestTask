@@ -11,6 +11,7 @@
 #import "UserData.h"
 #import <CoreLocation/CoreLocation.h>
 #import <RKDropdownAlert/RKDropdownAlert.h>
+#import "MainModel.h"
 
 @interface AddNewUserViewController () <CLLocationManagerDelegate>
 
@@ -97,37 +98,20 @@
     }
     else
     {
-        NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        moc.parentContext = [[CoreDataManager sharedManager] mainContext];
+        MainModel *model = [MainModel new];
+        NSDictionary *newUser = @{@"name" : self.nameField.text,
+                                  @"userName" : self.userNameField.text,
+                                  @"phone" : self.phoneNumberField.text,
+                                  @"lat" : self.lat,
+                                  @"lng" : self.lng};
         
-        UserData *user = [NSEntityDescription insertNewObjectForEntityForName:@"UserData" inManagedObjectContext:moc];
-        user.name = self.nameField.text;
-        user.userName = self.userNameField.text;
-        user.phone = self.phoneNumberField.text;
-        user.lat = self.lat;
-        user.lng = self.lng;
-        user.userID = [NSNumber numberWithInteger:0];
-        
-        [moc performBlockAndWait:^{
-            NSError *error;
-            [moc save:&error];
-            if (error)
-            {
-#if DEBUG
-                NSLog(@"Saving error - %@", [error userInfo]);
-#endif
-            }
-        }];
-       
-        if ([[CoreDataManager sharedManager].mainContext hasChanges])
-        {
-            [[CoreDataManager sharedManager] saveContext];
+        if ([model createNewUserWithDictionary:newUser]) {
             self.nameField.text = self.userNameField.text = self.phoneNumberField.text = @"";
             [self showSuccessAlert];
             [self.nameField resignFirstResponder];
             [self.userNameField resignFirstResponder];
             [self.phoneNumberField resignFirstResponder];
-        };
+        }
     }
 }
 
