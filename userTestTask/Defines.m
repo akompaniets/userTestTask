@@ -8,5 +8,5 @@
 
 #import "Defines.h"
 
-NSString * url                      = @"http://jsonplaceholder.typicode.com/users";
-NSInteger defaultUserID             = 0;
+NSString * kBaseURL                      = @"http://jsonplaceholder.typicode.com/users";
+NSInteger kDefaultUserID             = 0;

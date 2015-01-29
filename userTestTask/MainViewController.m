@@ -18,13 +18,15 @@
 #import <SVPullToRefresh/SVPullToRefresh.h>
 
 
-@interface MainViewController () <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
+@interface MainViewController () <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) JGProgressHUD *hud;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 
 @end
 
@@ -36,6 +38,10 @@
     [super viewDidLoad];
     self.title = NSLocalizedString(@"user_list", nil);
     self.tableView.backgroundColor = [UIColor clearColor];
+    
+    self.searchBar.barStyle = UIBarStyleBlack;
+    self.searchBar.tintColor = [UIColor whiteColor];
+    self.searchBar.placeholder = @"Search";
    
     __weak typeof(self) weakSelf = self;
     
@@ -220,6 +226,27 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+   
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    searchBar.text = @"";
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
 }
 
 @end

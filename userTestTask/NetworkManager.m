@@ -18,7 +18,7 @@
 - (void)fetchUserDataWithCompletion:(void (^)(NSArray *, NSError *))block
 {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    [self GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self GET:kBaseURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         dispatch_async(queue, ^{
             
             if (responseObject && block) {

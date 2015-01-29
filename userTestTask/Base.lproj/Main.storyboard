@@ -40,6 +40,23 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="Unc-4G-RbY">
+                                    <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="Kvj-oQ-Oz7"/>
+                                    </constraints>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="Kvj-oQ-Oz7"/>
+                                        </mask>
+                                    </variation>
+                                    <connections>
+                                        <outlet property="delegate" destination="0Li-g8-79E" id="kkz-Me-RyA"/>
+                                    </connections>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="userCell" rowHeight="71" id="SrK-KI-fJX" customClass="UserCell">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -113,6 +130,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="YaR-id-agu" secondAttribute="trailing" id="10B-eP-kJ0"/>
+                            <constraint firstItem="nbA-4E-GEr" firstAttribute="top" secondItem="PPJ-28-DqO" secondAttribute="bottom" id="2yv-3I-yZi"/>
                             <constraint firstItem="nbA-4E-GEr" firstAttribute="leading" secondItem="Ltq-cj-1Ig" secondAttribute="leading" id="3jW-Ua-uHh"/>
                             <constraint firstItem="nbA-4E-GEr" firstAttribute="leading" secondItem="Ltq-cj-1Ig" secondAttribute="leading" id="BDH-zv-P2y"/>
                             <constraint firstItem="YaR-id-agu" firstAttribute="leading" secondItem="Ltq-cj-1Ig" secondAttribute="leading" id="DGf-TG-tz9"/>
@@ -128,6 +146,7 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="BDH-zv-P2y"/>
+                                <exclude reference="RZL-n0-UDs"/>
                                 <exclude reference="Rev-UW-NB8"/>
                                 <exclude reference="X7e-ui-KyS"/>
                                 <exclude reference="Kgy-vZ-tqJ"/>
@@ -143,6 +162,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="Unc-4G-RbY" id="zMW-d1-Bj8"/>
                         <outlet property="tableView" destination="nbA-4E-GEr" id="vfL-ka-NCt"/>
                     </connections>
                 </viewController>

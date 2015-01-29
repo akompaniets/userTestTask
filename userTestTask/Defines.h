@@ -14,5 +14,5 @@
 #define kFirstRun @"firstRun"
 #define isFirstRun ![[NSUserDefaults standardUserDefaults] boolForKey:kFirstRun]
 
-FOUNDATION_EXPORT NSString *url;
-FOUNDATION_EXPORT NSInteger defaultUserID;
+FOUNDATION_EXPORT NSString * kBaseURL;
+FOUNDATION_EXPORT NSInteger kDefaultUserID;
