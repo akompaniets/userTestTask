@@ -526,8 +526,8 @@
 			baseConfigurationReference = 14377C89294D10724476A42B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Kompaniets (MT836QR9K3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Kompaniets (MT836QR9K3)";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = userTestTask/PrefixHeader.pch;
@@ -535,7 +535,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Users;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "51f9e42a-2935-418d-9274-5d5141f28b26";
 			};
 			name = Debug;
 		};
@@ -544,8 +544,8 @@
 			baseConfigurationReference = 5837DA240FFA3A4D944EB485 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Kompaniets (MT836QR9K3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Kompaniets (MT836QR9K3)";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = userTestTask/PrefixHeader.pch;
@@ -553,7 +553,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Users;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "51f9e42a-2935-418d-9274-5d5141f28b26";
 			};
 			name = Release;
 		};
