@@ -13,16 +13,22 @@
 #import <RKDropdownAlert/RKDropdownAlert.h>
 #import "MainModel.h"
 
-@interface AddNewUserViewController () <CLLocationManagerDelegate>
+@interface AddNewUserViewController () <CLLocationManagerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *regViewTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pickerBottomConstraint;
 @property (weak, nonatomic) IBOutlet UIView *registrationView;
 @property (weak, nonatomic) IBOutlet UIImageView *regViewBackground;
+@property (weak, nonatomic) IBOutlet UIButton *companyButton;
 
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UILabel *regFormTitle;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *userNameField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberField;
+@property (strong, nonatomic) NSMutableDictionary *userData;
+@property (strong, nonatomic) NSArray *companies;
+@property (strong, nonatomic) MainModel *model;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSNumber *lat;
@@ -38,6 +44,8 @@
 {
     [super viewDidLoad];
     self.regViewBackground.image = [[UIImage imageNamed:@"cell_bg"] stretchableImageWithLeftCapWidth:8 topCapHeight:8];
+    
+  
     
     self.regFormTitle.text = NSLocalizedString(@"reg_form_title", nil);
     self.regFormTitle.font = CUSTOM_FONT;
@@ -59,7 +67,7 @@
 
 - (void)showRegistrationView
 {
-    self.regViewTopConstraint.constant = 100.0f;
+    self.regViewTopConstraint.constant = 80.0f;
     [UIView animateWithDuration:0.5 animations:^{
         self.registrationView.alpha = 1.0f;
         [self.view layoutIfNeeded];
@@ -71,7 +79,7 @@
 
 - (void)hideRegistrationView
 {
-    self.regViewTopConstraint.constant = -180.0f;
+    self.regViewTopConstraint.constant = -160.0f;
     [UIView animateWithDuration:0.5 animations:^{
         self.registrationView.alpha = 0.0f;
         [self.view layoutIfNeeded];
@@ -114,6 +122,38 @@
         }
     }
 }
+
+- (IBAction)chooseCompany:(UIButton *)sender
+{
+    [self.nameField resignFirstResponder];
+    [self.userNameField resignFirstResponder];
+    [self.phoneNumberField resignFirstResponder];
+    self.model = [MainModel new];
+    self.companies = [self.model fetchAllCompanies];
+    
+
+    
+    
+}
+
+#pragma mark - UIPickerViewDataSource\UIPickerViewDelegate
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+// returns the # of rows in each component..
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [self.companies count];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    
+}
+
 
 #pragma mark - 
 

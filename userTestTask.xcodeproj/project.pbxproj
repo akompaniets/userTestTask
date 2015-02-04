@@ -27,7 +27,9 @@
 		49FD04021A45D345007732F9 /* LaunchImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FD04011A45D345007732F9 /* LaunchImage.xib */; };
 		49FD04051A45E268007732F9 /* UserAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FD04041A45E268007732F9 /* UserAnnotation.m */; };
 		72D277522B4CB991D1AA40DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D4FB30CA8D123E081486CD /* libPods.a */; };
-		DF5B89CC1A790B2700404450 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = DF5B89CB1A790B2700404450 /* UserData.m */; };
+		DF2415FF1A82455F004AEA3E /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2415FE1A82455F004AEA3E /* Company.m */; };
+		DF2416021A82455F004AEA3E /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2416011A82455F004AEA3E /* UserData.m */; };
+		DF2416051A8247E7004AEA3E /* Companies.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2416041A8247E7004AEA3E /* Companies.m */; };
 		DFA8CEDD1A7A7ABC00927416 /* Defines.m in Sources */ = {isa = PBXBuildFile; fileRef = DFA8CEDC1A7A7ABC00927416 /* Defines.m */; };
 /* End PBXBuildFile section */
 
@@ -81,8 +83,12 @@
 		49FD04031A45E268007732F9 /* UserAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAnnotation.h; sourceTree = "<group>"; };
 		49FD04041A45E268007732F9 /* UserAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAnnotation.m; sourceTree = "<group>"; };
 		5837DA240FFA3A4D944EB485 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		DF5B89CA1A790B2700404450 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
-		DF5B89CB1A790B2700404450 /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
+		DF2415FD1A82455F004AEA3E /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
+		DF2415FE1A82455F004AEA3E /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
+		DF2416001A82455F004AEA3E /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
+		DF2416011A82455F004AEA3E /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
+		DF2416031A8247E7004AEA3E /* Companies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Companies.h; sourceTree = "<group>"; };
+		DF2416041A8247E7004AEA3E /* Companies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Companies.m; sourceTree = "<group>"; };
 		DFA8CEDC1A7A7ABC00927416 /* Defines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Defines.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -234,8 +240,12 @@
 			children = (
 				49E874681A38898A00E2A1C8 /* CoreDataManager.h */,
 				49E874691A38898A00E2A1C8 /* CoreDataManager.m */,
-				DF5B89CA1A790B2700404450 /* UserData.h */,
-				DF5B89CB1A790B2700404450 /* UserData.m */,
+				DF2416001A82455F004AEA3E /* UserData.h */,
+				DF2416011A82455F004AEA3E /* UserData.m */,
+				DF2415FD1A82455F004AEA3E /* Company.h */,
+				DF2415FE1A82455F004AEA3E /* Company.m */,
+				DF2416031A8247E7004AEA3E /* Companies.h */,
+				DF2416041A8247E7004AEA3E /* Companies.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -391,16 +401,18 @@
 			files = (
 				49E8743F1A3864E200E2A1C8 /* AppDelegate.m in Sources */,
 				49FD04051A45E268007732F9 /* UserAnnotation.m in Sources */,
+				DF2416021A82455F004AEA3E /* UserData.m in Sources */,
 				49E8746A1A38898A00E2A1C8 /* CoreDataManager.m in Sources */,
 				49E874421A3864E200E2A1C8 /* userTestTask.xcdatamodeld in Sources */,
 				49E874671A387B3800E2A1C8 /* AddNewUserViewController.m in Sources */,
 				49E8746D1A388CD500E2A1C8 /* UserCell.m in Sources */,
 				DFA8CEDD1A7A7ABC00927416 /* Defines.m in Sources */,
 				49E8747A1A38BC4E00E2A1C8 /* MainModel.m in Sources */,
+				DF2416051A8247E7004AEA3E /* Companies.m in Sources */,
 				49E874451A3864E200E2A1C8 /* MainViewController.m in Sources */,
 				49E874641A387B0D00E2A1C8 /* UserDetailViewController.m in Sources */,
+				DF2415FF1A82455F004AEA3E /* Company.m in Sources */,
 				49E8747D1A38BCFB00E2A1C8 /* NetworkManager.m in Sources */,
-				DF5B89CC1A790B2700404450 /* UserData.m in Sources */,
 				49E8743C1A3864E200E2A1C8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

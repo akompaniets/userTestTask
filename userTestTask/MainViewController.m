@@ -31,6 +31,9 @@
 @end
 
 @implementation MainViewController
+{
+    NSArray *searchResult;
+}
 
 #pragma mark - Life cycle
 
@@ -38,6 +41,8 @@
     [super viewDidLoad];
     self.title = NSLocalizedString(@"user_list", nil);
     self.tableView.backgroundColor = [UIColor clearColor];
+    
+    searchResult = self.fetchedResultsController.fetchedObjects;
     
     self.searchBar.barStyle = UIBarStyleBlack;
     self.searchBar.tintColor = [UIColor whiteColor];
@@ -108,7 +113,7 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     UserCell *userCell = (UserCell *)cell;
-    UserData *currentUser = [self.fetchedResultsController fetchedObjects][indexPath.row];
+    UserData *currentUser = self.fetchedResultsController.fetchedObjects[indexPath.row];
     [userCell configureCellWithObject:currentUser];
 }
 
@@ -161,7 +166,7 @@
                                               inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
 
-    [fetchRequest setFetchBatchSize:10];
+    [fetchRequest setFetchBatchSize:15];
     
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userID"
                                                                    ascending:YES];
@@ -173,7 +178,7 @@
     [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                         managedObjectContext:self.managedObjectContext
                                           sectionNameKeyPath:nil
-                                                   cacheName:@"Test"];
+                                                   cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
@@ -223,30 +228,52 @@
     }
 }
 
+
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
+}
+
+- (void) filterTableViewWithText:(NSString *)searchText
+{
+    NSPredicate *predicate = nil;
+    
+    if (searchText.length != 0)
+    {
+        predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[c] %@", searchText];
+    }
+  
+    self.fetchedResultsController.fetchRequest.predicate = predicate;
+    [self.fetchedResultsController performFetch:nil];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
     [searchBar setShowsCancelButton:YES animated:YES];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-   
+    [self filterTableViewWithText:searchText];
+}
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+//    [self filterTableViewWithText:nil];
+//    searchBar.text = @"";
+//    [searchBar setShowsCancelButton:NO animated:NO];
+//    [searchBar resignFirstResponder];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     searchBar.text = @"";
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self filterTableViewWithText:nil];
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
+
 }
 
 @end

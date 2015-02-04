@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *userNameField;
 @property (weak, nonatomic) IBOutlet UITextField *userPhoneField;
+@property (weak, nonatomic) IBOutlet UILabel *userCompany;
+
 
 @property (strong, nonatomic) UserData *currentUser;
 
