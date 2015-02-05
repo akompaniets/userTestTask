@@ -86,6 +86,7 @@
 		DF74D7DB1A837B53003BE6FB /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
 		DF74D7DD1A837B53003BE6FB /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		DF74D7DE1A837B53003BE6FB /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
+		DF74D7E01A839989003BE6FB /* userTestTask 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "userTestTask 2.xcdatamodel"; sourceTree = "<group>"; };
 		DFA8CEDC1A7A7ABC00927416 /* Defines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Defines.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -633,9 +634,10 @@
 		49E874401A3864E200E2A1C8 /* userTestTask.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				DF74D7E01A839989003BE6FB /* userTestTask 2.xcdatamodel */,
 				49E874411A3864E200E2A1C8 /* userTestTask.xcdatamodel */,
 			);
-			currentVersion = 49E874411A3864E200E2A1C8 /* userTestTask.xcdatamodel */;
+			currentVersion = DF74D7E01A839989003BE6FB /* userTestTask 2.xcdatamodel */;
 			path = userTestTask.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
