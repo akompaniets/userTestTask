@@ -61,12 +61,19 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    if (self.fetchedResultsController.fetchedObjects.count > 0) {
+        [self scrollTableViewToTop];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)scrollTableViewToTop
+{
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 #pragma mark - Fetching User Data
@@ -86,7 +93,7 @@
         else
         {
             [self.hud dismissAnimated:YES];
-            [self.tableView.pullToRefreshView startAnimating];
+            [self.tableView.pullToRefreshView stopAnimating];
             [RKDropdownAlert title:NSLocalizedString(@"error", nil)
                            message:NSLocalizedString(@"error_internet_connection", nil)
                    backgroundColor:[UIColor redColor]
