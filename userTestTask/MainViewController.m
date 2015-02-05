@@ -31,9 +31,6 @@
 @end
 
 @implementation MainViewController
-{
-    NSArray *searchResult;
-}
 
 #pragma mark - Life cycle
 
@@ -41,8 +38,6 @@
     [super viewDidLoad];
     self.title = NSLocalizedString(@"user_list", nil);
     self.tableView.backgroundColor = [UIColor clearColor];
-    
-    searchResult = self.fetchedResultsController.fetchedObjects;
     
     self.searchBar.barStyle = UIBarStyleBlack;
     self.searchBar.tintColor = [UIColor whiteColor];
@@ -61,6 +56,12 @@
     {
         [self fetchUsersData];
     }
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
