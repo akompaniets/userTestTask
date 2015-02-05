@@ -27,17 +27,19 @@
 @property (weak, nonatomic) IBOutlet UITextField *userNameField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberField;
 @property (strong, nonatomic) NSMutableDictionary *userData;
-@property (strong, nonatomic) NSArray *companies;
 @property (strong, nonatomic) MainModel *model;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSNumber *lat;
 @property (strong, nonatomic) NSNumber *lng;
-
+@property (strong, nonatomic) NSArray *companies;
 
 @end
 
 @implementation AddNewUserViewController
+{
+    NSArray *companyNames;
+}
 
 #pragma mark - Life cycle
 - (void)viewDidLoad
@@ -45,7 +47,13 @@
     [super viewDidLoad];
     self.regViewBackground.image = [[UIImage imageNamed:@"cell_bg"] stretchableImageWithLeftCapWidth:8 topCapHeight:8];
     
-  
+    self.pickerBottomConstraint.constant = -160.0f;
+    self.model = [MainModel new];
+    [self.model fetchAllCompaniesWithCompletitionBlock:^(NSArray *result) {
+        if (result) {
+            companyNames = result;
+        }
+    }];
     
     self.regFormTitle.text = NSLocalizedString(@"reg_form_title", nil);
     self.regFormTitle.font = CUSTOM_FONT;
@@ -67,8 +75,8 @@
 
 - (void)showRegistrationView
 {
-    self.regViewTopConstraint.constant = 80.0f;
-    [UIView animateWithDuration:0.5 animations:^{
+    self.regViewTopConstraint.constant = 75.0f;
+    [UIView animateWithDuration:0.3 animations:^{
         self.registrationView.alpha = 1.0f;
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
@@ -80,7 +88,7 @@
 - (void)hideRegistrationView
 {
     self.regViewTopConstraint.constant = -160.0f;
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         self.registrationView.alpha = 0.0f;
         [self.view layoutIfNeeded];
     }];
@@ -96,7 +104,7 @@
 
 - (IBAction)saveButtonPressed:(id)sender
 {
-    if (!self.nameField.text.length || !self.userNameField.text.length || !self.phoneNumberField.text.length)
+    if (!self.nameField.text.length || !self.userNameField.text.length || !self.phoneNumberField.text.length || ![self.userData objectForKey:@"company"])
     {
         [RKDropdownAlert title:NSLocalizedString(@"error", nil)
                        message:NSLocalizedString(@"fill_all_fields", nil)
@@ -107,14 +115,22 @@
     else
     {
         MainModel *model = [MainModel new];
+        if (!self.userData) {
+            _userData = [[NSMutableDictionary alloc] init];
+        }
+        
         NSDictionary *newUser = @{@"name" : self.nameField.text,
                                   @"userName" : self.userNameField.text,
                                   @"phone" : self.phoneNumberField.text,
                                   @"lat" : self.lat,
                                   @"lng" : self.lng};
         
-        if ([model createNewUserWithDictionary:newUser]) {
+    
+        [self.userData addEntriesFromDictionary:newUser];
+        
+        if ([model createNewUserWithDictionary:self.userData]) {
             self.nameField.text = self.userNameField.text = self.phoneNumberField.text = @"";
+            [self setTitleForCompanyButton:@"Company:"];
             [self showSuccessAlert];
             [self.nameField resignFirstResponder];
             [self.userNameField resignFirstResponder];
@@ -128,12 +144,12 @@
     [self.nameField resignFirstResponder];
     [self.userNameField resignFirstResponder];
     [self.phoneNumberField resignFirstResponder];
-    self.model = [MainModel new];
-    self.companies = [self.model fetchAllCompanies];
-    
 
     
-    
+    self.pickerBottomConstraint.constant = 0.0f;
+    [UIView animateWithDuration:0.3f animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 #pragma mark - UIPickerViewDataSource\UIPickerViewDelegate
@@ -143,15 +159,33 @@
     return 1;
 }
 
-// returns the # of rows in each component..
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [self.companies count];
+    return companyNames.count;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return companyNames[row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    
+    if (!self.userData) {
+        _userData = [[NSMutableDictionary alloc] init];
+    }
+    NSString *name = companyNames[row];
+    [self setTitleForCompanyButton:[NSString stringWithFormat:@"Company: %@", name]];
+    [self.userData setObject:name forKey:@"company"];
+        self.pickerBottomConstraint.constant = -160.0f;
+    [UIView animateWithDuration:0.3f animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void) setTitleForCompanyButton:(NSString *)title
+{
+    [self.companyButton setTitle:title forState:UIControlStateNormal];
 }
 
 

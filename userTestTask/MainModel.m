@@ -10,7 +10,6 @@
 #import "NetworkManager.h"
 #import "CoreDataManager.h"
 #import "UserData.h"
-#import "Companies.h"
 #import "Company.h"
 
 @interface MainModel()
@@ -141,7 +140,7 @@
 //    moc.parentContext = [CoreDataManager sharedManager].mainContext;
     
     for (NSDictionary *dict in data) {
-        Companies *company = [NSEntityDescription insertNewObjectForEntityForName:@"Companies" inManagedObjectContext:self.moc];
+        Company *company = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:self.moc];
         
         company.name = [dict objectForKey:@"name"];
         company.bs = [dict objectForKey:@"bs"];
@@ -168,13 +167,9 @@
 {
     UserData *user = [NSEntityDescription insertNewObjectForEntityForName:@"UserData"
                                                    inManagedObjectContext:self.moc];
-    Company *company = [NSEntityDescription insertNewObjectForEntityForName:@"Company"
-                                                   inManagedObjectContext:self.moc];
-    company.name = [dict valueForKeyPath:@"company.name"];
-    company.bs = [dict valueForKeyPath:@"company.bs"];
-    company.catchPhrase = [dict valueForKeyPath:@"company.catchPhrase"];
-    user.company = company;
-    
+
+
+    user.company = [dict valueForKeyPath:@"company.name"];
     user.name = [dict objectForKey:@"name"];
     user.phone = [dict objectForKey:@"phone"];
     user.userName = [dict objectForKey:@"username"];
@@ -184,35 +179,37 @@
    
 }
 
-- (NSArray *) fetchAllCompanies
+- (void) fetchAllCompaniesWithCompletitionBlock:(void (^)(NSArray *))block
 {
-    __block NSArray *fetchedArray;
-        NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        moc.parentContext = [CoreDataManager sharedManager].mainContext;
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
         
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *description = [NSEntityDescription entityForName:@"Companies" inManagedObjectContext:moc];
-    [request setEntity:description];
-    
-    NSError *error = nil;
-    fetchedArray = [moc executeFetchRequest:request error:&error];
-    
-//    NSMutableSet *temp = [[NSMutableSet alloc] init];
-//    for (NSDictionary *currentUser in fetchedArray)
-//    {
-//        [temp addObject:[currentUser objectForKey:@"userID"]];
-//    }
-//    
-    if (error) {
+        NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        moc.parentContext = [CoreDataManager sharedManager].mainContext;
+        
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        NSEntityDescription *description = [NSEntityDescription entityForName:@"Company" inManagedObjectContext:moc];
+        [request setEntity:description];
+        [request setResultType:NSDictionaryResultType];
+        [request setPropertiesToFetch:@[@"name"]];
+        
+        NSError *error = nil;
+        NSArray *fetchedArray = [moc executeFetchRequest:request error:&error];
+        NSMutableArray *temporary = [NSMutableArray array];
+        for (NSDictionary *dict in fetchedArray) {
+            [temporary addObject:[dict objectForKey:@"name"]];
+        }
+        if (error) {
 #ifdef DEBUG
-        NSLog(@"Erro fetching: %@", [error userInfo]);
+            NSLog(@"Erro fetching: %@", [error userInfo]);
 #endif
-    }
+        }
+        else if (block)
+        {
+            block([temporary copy]);
+        }
     });
-    return fetchedArray;
 }
 
 - (NSSet *) fetchAllUsersID
@@ -256,10 +253,11 @@
         
         UserData *newUser = [NSEntityDescription insertNewObjectForEntityForName:@"UserData" inManagedObjectContext:moc];
         newUser.name = [user objectForKey:@"name"];
-        newUser.userName = [user objectForKey:@"userName"];;
-        newUser.phone = [user objectForKey:@"phone"];;
-        newUser.lat = [user objectForKey:@"lat"];;
-        newUser.lng = [user objectForKey:@"lng"];;
+        newUser.userName = [user objectForKey:@"userName"];
+        newUser.phone = [user objectForKey:@"phone"];
+        newUser.lat = [user objectForKey:@"lat"];
+        newUser.lng = [user objectForKey:@"lng"];
+        newUser.company = [user objectForKey:@"company"];
         newUser.userID = [NSNumber numberWithInteger:kDefaultUserID];
         
         [moc performBlockAndWait:^{

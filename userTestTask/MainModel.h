@@ -17,6 +17,6 @@
 - (BOOL)createNewUserWithDictionary:(NSDictionary *)user;
 - (BOOL)commitChangesForUser:(UserData *)user;
 - (BOOL)deleteUser:(UserData *)user;
-- (NSArray *)fetchAllCompanies;
+- (void)fetchAllCompaniesWithCompletitionBlock:(void(^)(NSArray *result))block;
 
 @end

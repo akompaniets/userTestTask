@@ -12,7 +12,6 @@
 #import "UserAnnotation.h"
 #import <RKDropdownAlert/RKDropdownAlert.h>
 #import "MainModel.h"
-#import "Company.h"
 
 
 @interface UserDetailViewController () <UIAlertViewDelegate>
@@ -53,7 +52,7 @@
     self.nameField.text = self.currentUser.name;
     self.userNameField.text = self.currentUser.userName;
     self.userPhoneField.text = self.currentUser.phone;
-    self.userCompany.text = [NSString stringWithFormat:@"Company: %@", self.currentUser.company.name];
+    self.userCompany.text = [NSString stringWithFormat:@"Company: %@", self.currentUser.company];
     
     self.cancelButton.hidden = YES;
     
