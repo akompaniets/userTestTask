@@ -31,6 +31,9 @@
 @end
 
 @implementation MainViewController
+{
+    BOOL isSearchBarActive;
+}
 
 #pragma mark - Life cycle
 
@@ -74,6 +77,14 @@
 - (void)scrollTableViewToTop
 {
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (isSearchBarActive) {
+        [self.searchBar resignFirstResponder];
+        isSearchBarActive = NO;
+    }
 }
 
 #pragma mark - Fetching User Data
@@ -261,6 +272,7 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     [searchBar setShowsCancelButton:YES animated:YES];
+    isSearchBarActive = YES;
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText

@@ -211,6 +211,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Zt2-i0-YPK" id="XYX-ow-tBb"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l6w-LN-Rsx">
                                         <rect key="frame" x="50" y="76" width="470" height="30"/>
@@ -220,6 +223,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Zt2-i0-YPK" id="Mno-C2-tge"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C7a-2f-Suh">
                                         <rect key="frame" x="50" y="117" width="470" height="30"/>
@@ -228,6 +234,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Zt2-i0-YPK" id="cRP-wo-pd6"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="registrationForm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tvg-fI-cRJ">
                                         <rect key="frame" x="15" y="8" width="540" height="21"/>
@@ -308,15 +317,40 @@
                                     <outlet property="delegate" destination="Zt2-i0-YPK" id="iq7-MT-FLd"/>
                                 </connections>
                             </pickerView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VsK-Uw-iak">
+                                <rect key="frame" x="0.0" y="396" width="600" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="wmz-Pw-aPj"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Cancel" id="1ST-dW-FEU">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="dismissPickerView:" destination="Zt2-i0-YPK" id="sf6-kL-EW0"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="jwb-Kr-zCC"/>
+                                    <barButtonItem title="Done" id="jiv-7r-VC4">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="doneButtonPressed:" destination="Zt2-i0-YPK" id="20E-0a-8Do"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2Qr-jZ-PQb" firstAttribute="leading" secondItem="q1m-na-keD" secondAttribute="leading" id="1Uw-fu-dKW"/>
                             <constraint firstItem="2Qr-jZ-PQb" firstAttribute="top" secondItem="q1m-na-keD" secondAttribute="top" id="2GW-D9-v90"/>
+                            <constraint firstItem="9GM-gq-qfF" firstAttribute="top" secondItem="VsK-Uw-iak" secondAttribute="bottom" id="7Gh-SG-jBD"/>
+                            <constraint firstItem="VsK-Uw-iak" firstAttribute="leading" secondItem="q1m-na-keD" secondAttribute="leading" id="ABt-nL-Xi8"/>
                             <constraint firstAttribute="trailing" secondItem="9GM-gq-qfF" secondAttribute="trailing" id="Eor-uV-f7E"/>
                             <constraint firstAttribute="trailing" secondItem="2Qr-jZ-PQb" secondAttribute="trailing" id="Lj3-Af-62U"/>
                             <constraint firstAttribute="trailing" secondItem="yT0-Lr-2df" secondAttribute="trailing" constant="15" id="Mbj-69-b0f"/>
                             <constraint firstItem="GWs-Ar-YYF" firstAttribute="top" secondItem="q1m-na-keD" secondAttribute="top" id="P6y-fR-QDD"/>
+                            <constraint firstAttribute="trailing" secondItem="VsK-Uw-iak" secondAttribute="trailing" id="QCn-fr-xMa"/>
                             <constraint firstItem="yT0-Lr-2df" firstAttribute="top" secondItem="q1m-na-keD" secondAttribute="top" constant="-160" id="Tkx-HD-8yE"/>
                             <constraint firstItem="9GM-gq-qfF" firstAttribute="leading" secondItem="q1m-na-keD" secondAttribute="leading" id="VsG-tH-ZRs"/>
                             <constraint firstAttribute="bottom" secondItem="2Qr-jZ-PQb" secondAttribute="bottom" id="abc-me-OE4"/>

@@ -13,7 +13,7 @@
 #import <RKDropdownAlert/RKDropdownAlert.h>
 #import "MainModel.h"
 
-@interface AddNewUserViewController () <CLLocationManagerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface AddNewUserViewController () <CLLocationManagerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *regViewTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pickerBottomConstraint;
@@ -39,6 +39,7 @@
 @implementation AddNewUserViewController
 {
     NSArray *companyNames;
+    NSInteger selectedRow;
 }
 
 #pragma mark - Life cycle
@@ -47,7 +48,7 @@
     [super viewDidLoad];
     self.regViewBackground.image = [[UIImage imageNamed:@"cell_bg"] stretchableImageWithLeftCapWidth:8 topCapHeight:8];
     
-    self.pickerBottomConstraint.constant = -160.0f;
+    self.pickerBottomConstraint.constant = -204.0f;
     self.model = [MainModel new];
     [self.model fetchAllCompaniesWithCompletitionBlock:^(NSArray *result) {
         if (result) {
@@ -95,6 +96,35 @@
 }
 
 #pragma mark - Actions
+
+- (IBAction)doneButtonPressed:(UIBarButtonItem *)sender
+{
+    if (selectedRow)
+    {
+        if (!self.userData)
+        {
+            _userData = [[NSMutableDictionary alloc] init];
+        }
+        NSString *name = companyNames[selectedRow];
+        [self setTitleForCompanyButton:[NSString stringWithFormat:@"Company: %@", name]];
+        [self.userData setObject:name forKey:@"company"];
+        [self hidePicker];
+    }
+}
+
+
+- (IBAction)dismissPickerView:(UIBarButtonItem *)sender
+{
+    [self hidePicker];
+}
+
+- (void) hidePicker
+{
+    self.pickerBottomConstraint.constant = -204.0f;
+    [UIView animateWithDuration:0.3f animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
 
 - (IBAction)cancelButtonPressed:(id)sender
 {
@@ -171,16 +201,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    if (!self.userData) {
-        _userData = [[NSMutableDictionary alloc] init];
-    }
-    NSString *name = companyNames[row];
-    [self setTitleForCompanyButton:[NSString stringWithFormat:@"Company: %@", name]];
-    [self.userData setObject:name forKey:@"company"];
-        self.pickerBottomConstraint.constant = -160.0f;
-    [UIView animateWithDuration:0.3f animations:^{
-        [self.view layoutIfNeeded];
-    }];
+    selectedRow = row;
 }
 
 - (void) setTitleForCompanyButton:(NSString *)title
@@ -239,6 +260,14 @@
                    message:NSLocalizedString(@"error_getting_current_location", nil)
            backgroundColor:[UIColor yellowColor]
                  textColor:[UIColor blackColor]];
+}
+#pragma mark -
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end
