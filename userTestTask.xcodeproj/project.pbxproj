@@ -29,6 +29,10 @@
 		72D277522B4CB991D1AA40DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D4FB30CA8D123E081486CD /* libPods.a */; };
 		DF74D7DC1A837B53003BE6FB /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = DF74D7DB1A837B53003BE6FB /* Company.m */; };
 		DF74D7DF1A837B53003BE6FB /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = DF74D7DE1A837B53003BE6FB /* UserData.m */; };
+		DF8F89151A85077200D55795 /* MainTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8F89141A85077200D55795 /* MainTabController.m */; };
+		DF8F89181A850D6F00D55795 /* CompaniesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8F89171A850D6F00D55795 /* CompaniesViewController.m */; };
+		DF8F891C1A850E6D00D55795 /* CompanyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8F891A1A850E6D00D55795 /* CompanyCell.m */; };
+		DF8F89201A8522DE00D55795 /* CompanyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8F891F1A8522DE00D55795 /* CompanyDetailViewController.m */; };
 		DFA8CEDD1A7A7ABC00927416 /* Defines.m in Sources */ = {isa = PBXBuildFile; fileRef = DFA8CEDC1A7A7ABC00927416 /* Defines.m */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +91,14 @@
 		DF74D7DD1A837B53003BE6FB /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		DF74D7DE1A837B53003BE6FB /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
 		DF74D7E01A839989003BE6FB /* userTestTask 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "userTestTask 2.xcdatamodel"; sourceTree = "<group>"; };
+		DF8F89131A85077100D55795 /* MainTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabController.h; sourceTree = "<group>"; };
+		DF8F89141A85077200D55795 /* MainTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabController.m; sourceTree = "<group>"; };
+		DF8F89161A850D6F00D55795 /* CompaniesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompaniesViewController.h; sourceTree = "<group>"; };
+		DF8F89171A850D6F00D55795 /* CompaniesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompaniesViewController.m; sourceTree = "<group>"; };
+		DF8F89191A850E6D00D55795 /* CompanyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyCell.h; sourceTree = "<group>"; };
+		DF8F891A1A850E6D00D55795 /* CompanyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyCell.m; sourceTree = "<group>"; };
+		DF8F891E1A8522DE00D55795 /* CompanyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyDetailViewController.h; sourceTree = "<group>"; };
+		DF8F891F1A8522DE00D55795 /* CompanyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyDetailViewController.m; sourceTree = "<group>"; };
 		DFA8CEDC1A7A7ABC00927416 /* Defines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Defines.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +137,12 @@
 			children = (
 				49E874431A3864E200E2A1C8 /* MainViewController.h */,
 				49E874441A3864E200E2A1C8 /* MainViewController.m */,
+				DF8F89131A85077100D55795 /* MainTabController.h */,
+				DF8F89141A85077200D55795 /* MainTabController.m */,
+				DF8F89161A850D6F00D55795 /* CompaniesViewController.h */,
+				DF8F89171A850D6F00D55795 /* CompaniesViewController.m */,
+				DF8F891E1A8522DE00D55795 /* CompanyDetailViewController.h */,
+				DF8F891F1A8522DE00D55795 /* CompanyDetailViewController.m */,
 				49E874621A387B0D00E2A1C8 /* UserDetailViewController.h */,
 				49E874631A387B0D00E2A1C8 /* UserDetailViewController.m */,
 				49E874651A387B3800E2A1C8 /* AddNewUserViewController.h */,
@@ -147,6 +165,8 @@
 			children = (
 				49E8746B1A388CD500E2A1C8 /* UserCell.h */,
 				49E8746C1A388CD500E2A1C8 /* UserCell.m */,
+				DF8F89191A850E6D00D55795 /* CompanyCell.h */,
+				DF8F891A1A850E6D00D55795 /* CompanyCell.m */,
 			);
 			name = CustomTableCells;
 			sourceTree = "<group>";
@@ -395,10 +415,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF8F89151A85077200D55795 /* MainTabController.m in Sources */,
 				49E8743F1A3864E200E2A1C8 /* AppDelegate.m in Sources */,
+				DF8F89181A850D6F00D55795 /* CompaniesViewController.m in Sources */,
 				49FD04051A45E268007732F9 /* UserAnnotation.m in Sources */,
 				DF74D7DF1A837B53003BE6FB /* UserData.m in Sources */,
+				DF8F891C1A850E6D00D55795 /* CompanyCell.m in Sources */,
 				49E8746A1A38898A00E2A1C8 /* CoreDataManager.m in Sources */,
+				DF8F89201A8522DE00D55795 /* CompanyDetailViewController.m in Sources */,
 				49E874421A3864E200E2A1C8 /* userTestTask.xcdatamodeld in Sources */,
 				49E874671A387B3800E2A1C8 /* AddNewUserViewController.m in Sources */,
 				49E8746D1A388CD500E2A1C8 /* UserCell.m in Sources */,

@@ -90,8 +90,9 @@
 {
     if (isFirstRun)
     {
-        NSMutableArray *temp = [[NSMutableArray alloc] init];
-        for (NSDictionary *dict in data) {
+        NSMutableSet *temp = [[NSMutableSet alloc] init];
+        for (NSDictionary *dict in data)
+        {
             [temp addObject:[dict objectForKey:@"company"]];
         }
         [self handleCompaniesList:[temp copy]];
@@ -134,7 +135,7 @@
     }
 }
 
-- (void) handleCompaniesList:(NSArray *)data
+- (void) handleCompaniesList:(NSSet *)data
 {
 //    NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
 //    moc.parentContext = [CoreDataManager sharedManager].mainContext;

@@ -51,7 +51,8 @@
     self.pickerBottomConstraint.constant = -204.0f;
     self.model = [MainModel new];
     [self.model fetchAllCompaniesWithCompletitionBlock:^(NSArray *result) {
-        if (result) {
+        if (result)
+        {
             companyNames = result;
         }
     }];
