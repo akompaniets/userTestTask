@@ -14,5 +14,8 @@
 #define kFirstRun @"firstRun"
 #define isFirstRun ![[NSUserDefaults standardUserDefaults] boolForKey:kFirstRun]
 
+#define kSyncDB @"syncDB"
+#define isSynchronizedDB [[NSUserDefaults standardUserDefaults] boolForKey:kSyncDB]
+
 FOUNDATION_EXPORT NSString * kBaseURL;
 FOUNDATION_EXPORT NSInteger kDefaultUserID;

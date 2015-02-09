@@ -13,7 +13,6 @@
 		49D03F031A4366EE00BD26B1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D03F021A4366EE00BD26B1 /* CoreLocation.framework */; };
 		49E8743C1A3864E200E2A1C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E8743B1A3864E200E2A1C8 /* main.m */; };
 		49E8743F1A3864E200E2A1C8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E8743E1A3864E200E2A1C8 /* AppDelegate.m */; };
-		49E874421A3864E200E2A1C8 /* userTestTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49E874401A3864E200E2A1C8 /* userTestTask.xcdatamodeld */; };
 		49E874451A3864E200E2A1C8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E874441A3864E200E2A1C8 /* MainViewController.m */; };
 		49E874481A3864E200E2A1C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49E874461A3864E200E2A1C8 /* Main.storyboard */; };
 		49E8744A1A3864E200E2A1C8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E874491A3864E200E2A1C8 /* Images.xcassets */; };
@@ -27,8 +26,9 @@
 		49FD04021A45D345007732F9 /* LaunchImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FD04011A45D345007732F9 /* LaunchImage.xib */; };
 		49FD04051A45E268007732F9 /* UserAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FD04041A45E268007732F9 /* UserAnnotation.m */; };
 		72D277522B4CB991D1AA40DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D4FB30CA8D123E081486CD /* libPods.a */; };
-		DF74D7DC1A837B53003BE6FB /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = DF74D7DB1A837B53003BE6FB /* Company.m */; };
-		DF74D7DF1A837B53003BE6FB /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = DF74D7DE1A837B53003BE6FB /* UserData.m */; };
+		DF6B9B591A88D4D300064084 /* userTestTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DF6B9B561A88D4D300064084 /* userTestTask.xcdatamodeld */; };
+		DF6B9B6F1A88E2D800064084 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = DF6B9B6E1A88E2D800064084 /* Company.m */; };
+		DF6B9B721A88E2D900064084 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = DF6B9B711A88E2D900064084 /* UserData.m */; };
 		DF8F89151A85077200D55795 /* MainTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8F89141A85077200D55795 /* MainTabController.m */; };
 		DF8F89181A850D6F00D55795 /* CompaniesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8F89171A850D6F00D55795 /* CompaniesViewController.m */; };
 		DF8F891C1A850E6D00D55795 /* CompanyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8F891A1A850E6D00D55795 /* CompanyCell.m */; };
@@ -56,7 +56,6 @@
 		49E8743B1A3864E200E2A1C8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49E8743D1A3864E200E2A1C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		49E8743E1A3864E200E2A1C8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		49E874411A3864E200E2A1C8 /* userTestTask.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = userTestTask.xcdatamodel; sourceTree = "<group>"; };
 		49E874431A3864E200E2A1C8 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		49E874441A3864E200E2A1C8 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		49E874471A3864E200E2A1C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -86,11 +85,13 @@
 		49FD04031A45E268007732F9 /* UserAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAnnotation.h; sourceTree = "<group>"; };
 		49FD04041A45E268007732F9 /* UserAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAnnotation.m; sourceTree = "<group>"; };
 		5837DA240FFA3A4D944EB485 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		DF74D7DA1A837B53003BE6FB /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
-		DF74D7DB1A837B53003BE6FB /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
-		DF74D7DD1A837B53003BE6FB /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
-		DF74D7DE1A837B53003BE6FB /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
-		DF74D7E01A839989003BE6FB /* userTestTask 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "userTestTask 2.xcdatamodel"; sourceTree = "<group>"; };
+		DF6B9B571A88D4D300064084 /* userTestTask 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "userTestTask 2.xcdatamodel"; sourceTree = "<group>"; };
+		DF6B9B581A88D4D300064084 /* userTestTask.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = userTestTask.xcdatamodel; sourceTree = "<group>"; };
+		DF6B9B601A88D7AF00064084 /* userTestTask 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "userTestTask 3.xcdatamodel"; sourceTree = "<group>"; };
+		DF6B9B6D1A88E2D800064084 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
+		DF6B9B6E1A88E2D800064084 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
+		DF6B9B701A88E2D900064084 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
+		DF6B9B711A88E2D900064084 /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
 		DF8F89131A85077100D55795 /* MainTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabController.h; sourceTree = "<group>"; };
 		DF8F89141A85077200D55795 /* MainTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabController.m; sourceTree = "<group>"; };
 		DF8F89161A850D6F00D55795 /* CompaniesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompaniesViewController.h; sourceTree = "<group>"; };
@@ -214,9 +215,9 @@
 				49C10E031A4CD492002FD159 /* ViewControllers */,
 				49E874781A38BC4E00E2A1C8 /* MainModel.h */,
 				49E874791A38BC4E00E2A1C8 /* MainModel.m */,
+				DF6B9B561A88D4D300064084 /* userTestTask.xcdatamodeld */,
 				49E874461A3864E200E2A1C8 /* Main.storyboard */,
 				49E874491A3864E200E2A1C8 /* Images.xcassets */,
-				49E874401A3864E200E2A1C8 /* userTestTask.xcdatamodeld */,
 				49FD04011A45D345007732F9 /* LaunchImage.xib */,
 				49E874391A3864E200E2A1C8 /* Supporting Files */,
 			);
@@ -258,10 +259,10 @@
 			children = (
 				49E874681A38898A00E2A1C8 /* CoreDataManager.h */,
 				49E874691A38898A00E2A1C8 /* CoreDataManager.m */,
-				DF74D7DD1A837B53003BE6FB /* UserData.h */,
-				DF74D7DE1A837B53003BE6FB /* UserData.m */,
-				DF74D7DA1A837B53003BE6FB /* Company.h */,
-				DF74D7DB1A837B53003BE6FB /* Company.m */,
+				DF6B9B701A88E2D900064084 /* UserData.h */,
+				DF6B9B711A88E2D900064084 /* UserData.m */,
+				DF6B9B6D1A88E2D800064084 /* Company.h */,
+				DF6B9B6E1A88E2D800064084 /* Company.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -419,18 +420,18 @@
 				49E8743F1A3864E200E2A1C8 /* AppDelegate.m in Sources */,
 				DF8F89181A850D6F00D55795 /* CompaniesViewController.m in Sources */,
 				49FD04051A45E268007732F9 /* UserAnnotation.m in Sources */,
-				DF74D7DF1A837B53003BE6FB /* UserData.m in Sources */,
+				DF6B9B721A88E2D900064084 /* UserData.m in Sources */,
 				DF8F891C1A850E6D00D55795 /* CompanyCell.m in Sources */,
 				49E8746A1A38898A00E2A1C8 /* CoreDataManager.m in Sources */,
+				DF6B9B6F1A88E2D800064084 /* Company.m in Sources */,
+				DF6B9B591A88D4D300064084 /* userTestTask.xcdatamodeld in Sources */,
 				DF8F89201A8522DE00D55795 /* CompanyDetailViewController.m in Sources */,
-				49E874421A3864E200E2A1C8 /* userTestTask.xcdatamodeld in Sources */,
 				49E874671A387B3800E2A1C8 /* AddNewUserViewController.m in Sources */,
 				49E8746D1A388CD500E2A1C8 /* UserCell.m in Sources */,
 				DFA8CEDD1A7A7ABC00927416 /* Defines.m in Sources */,
 				49E8747A1A38BC4E00E2A1C8 /* MainModel.m in Sources */,
 				49E874451A3864E200E2A1C8 /* MainViewController.m in Sources */,
 				49E874641A387B0D00E2A1C8 /* UserDetailViewController.m in Sources */,
-				DF74D7DC1A837B53003BE6FB /* Company.m in Sources */,
 				49E8747D1A38BCFB00E2A1C8 /* NetworkManager.m in Sources */,
 				49E8743C1A3864E200E2A1C8 /* main.m in Sources */,
 			);
@@ -663,13 +664,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		49E874401A3864E200E2A1C8 /* userTestTask.xcdatamodeld */ = {
+		DF6B9B561A88D4D300064084 /* userTestTask.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				DF74D7E01A839989003BE6FB /* userTestTask 2.xcdatamodel */,
-				49E874411A3864E200E2A1C8 /* userTestTask.xcdatamodel */,
+				DF6B9B601A88D7AF00064084 /* userTestTask 3.xcdatamodel */,
+				DF6B9B571A88D4D300064084 /* userTestTask 2.xcdatamodel */,
+				DF6B9B581A88D4D300064084 /* userTestTask.xcdatamodel */,
 			);
-			currentVersion = DF74D7E01A839989003BE6FB /* userTestTask 2.xcdatamodel */;
+			currentVersion = DF6B9B601A88D7AF00064084 /* userTestTask 3.xcdatamodel */;
 			path = userTestTask.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

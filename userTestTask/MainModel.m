@@ -41,6 +41,14 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
         
+        CGFloat appVersion = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] floatValue];
+        if (appVersion == 2.0 && !isSynchronizedDB)
+        {
+            [self synchronizeDataBase];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSyncDB];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
         if (!self.networkManager && !self.coreDataManager) {
             self.networkManager = [NetworkManager new];
             self.coreDataManager = [CoreDataManager sharedManager];
@@ -252,15 +260,29 @@
         NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         moc.parentContext = [[CoreDataManager sharedManager] mainContext];
         
+        
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        NSEntityDescription *description = [NSEntityDescription entityForName:@"Company" inManagedObjectContext:moc];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", [user objectForKey:@"company"]];
+        [request setEntity:description];
+        [request setResultType:NSManagedObjectResultType];
+        [request setPredicate:predicate];
+        NSError *error = nil;
+        NSArray *obj = [moc executeFetchRequest:request error:&error];
+        Company *currentCompany;
+        if (!error)
+        {
+            currentCompany = (Company *)obj[0];
+        }
         UserData *newUser = [NSEntityDescription insertNewObjectForEntityForName:@"UserData" inManagedObjectContext:moc];
         newUser.name = [user objectForKey:@"name"];
         newUser.userName = [user objectForKey:@"userName"];
         newUser.phone = [user objectForKey:@"phone"];
         newUser.lat = [user objectForKey:@"lat"];
         newUser.lng = [user objectForKey:@"lng"];
-        newUser.company = [user objectForKey:@"company"];
+        newUser.company = currentCompany;
         newUser.userID = [NSNumber numberWithInteger:kDefaultUserID];
-        
+
         [moc performBlockAndWait:^{
             NSError *error;
             [moc save:&error];
@@ -299,6 +321,59 @@
     [[CoreDataManager sharedManager].mainContext deleteObject:user];
 
     return [[CoreDataManager sharedManager] saveContext];
+}
+
+
+#pragma mark - CoreData Synchronization
+
+- (void) synchronizeDataBase
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        
+        NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        moc.parentContext = [CoreDataManager sharedManager].mainContext;
+        
+        NSFetchRequest *companyRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *description = [NSEntityDescription entityForName:@"Company" inManagedObjectContext:moc];
+        [companyRequest setEntity:description];
+        
+        NSError *error = nil;
+        NSArray *companies = [moc executeFetchRequest:companyRequest error:&error];
+        
+        
+        NSManagedObjectContext *mocUser = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        mocUser.parentContext = [CoreDataManager sharedManager].mainContext;
+        
+        NSFetchRequest *userRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *desc = [NSEntityDescription entityForName:@"UserData" inManagedObjectContext:mocUser];
+        [userRequest setEntity:desc];
+        
+        NSArray *allUsers = [moc executeFetchRequest:userRequest error:nil];
+        
+        for (Company *comp in companies)
+        {
+            for (UserData *user in allUsers)
+            {
+                if ([comp.name isEqualToString:user.companyName])
+                {
+                    [comp addUsersObject:user];
+                }
+            }
+        }
+        
+        [moc performBlockAndWait:^{
+            NSError *error = nil;
+            [moc save:&error];
+        }];
+//        
+//        [mocUser performBlockAndWait:^{
+//            NSError *error = nil;
+//            [mocUser save:&error];
+//        }];
+        
+        [[CoreDataManager sharedManager] saveContext];
+    });
 }
 
 @end

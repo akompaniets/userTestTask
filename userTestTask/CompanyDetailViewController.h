@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Company;
 
 @interface CompanyDetailViewController : UIViewController
+
+@property (strong, nonatomic) Company *company;
 
 @end

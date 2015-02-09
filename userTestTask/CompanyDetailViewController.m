@@ -7,16 +7,29 @@
 //
 
 #import "CompanyDetailViewController.h"
+#import "Company.h"
+#import "UserData.h"
 
-@interface CompanyDetailViewController ()
+@interface CompanyDetailViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *companyName;
 
 @end
 
 @implementation CompanyDetailViewController
+{
+    NSArray *users;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    users = [self.company.users allObjects];
+    self.companyName.text = self.company.name;
+    
+    self.tableView.backgroundColor = [UIColor clearColor];
+    
+    NSLog(@"Company Detail! Name - %@, User - %@", self.company.name, users);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +37,26 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [users count];
 }
-*/
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString * const cellID = @"cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+    [self configureCell:cell forIndexPah:indexPath];
+    return cell;
+}
+
+- (void) configureCell:(UITableViewCell *)cell forIndexPah:(NSIndexPath *)indexPath
+{
+    UserData *user = users[indexPath.row];
+    cell.textLabel.text = user.name;
+}
 
 @end
