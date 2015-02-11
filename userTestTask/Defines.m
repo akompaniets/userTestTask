@@ -8,5 +8,6 @@
 
 #import "Defines.h"
 
-NSString * kBaseURL                      = @"http://jsonplaceholder.typicode.com/users";
-NSInteger kDefaultUserID             = 0;
+NSString * kBaseURL                                 = @"http://jsonplaceholder.typicode.com/users";
+NSInteger kDefaultUserID                            = 0;
+NSString * kCurrentLocationDidUpdateNotification    = @"kCurrentLocationDidUpdateNotification";

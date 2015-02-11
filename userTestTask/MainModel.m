@@ -177,15 +177,16 @@
     UserData *user = [NSEntityDescription insertNewObjectForEntityForName:@"UserData"
                                                    inManagedObjectContext:self.moc];
 
-
-    user.company = [dict valueForKeyPath:@"company.name"];
+    NSString *companyName = [dict valueForKeyPath:@"company.name"];
+    Company *company = [self fetchCompanyByName:companyName];
+    
     user.name = [dict objectForKey:@"name"];
     user.phone = [dict objectForKey:@"phone"];
     user.userName = [dict objectForKey:@"username"];
     user.userID = [NSNumber numberWithInteger:[[dict valueForKey:@"id"] integerValue]];
     user.lat = [NSNumber numberWithFloat:[[dict valueForKeyPath:@"address.geo.lat"] floatValue]];
     user.lng = [NSNumber numberWithFloat:[[dict valueForKeyPath:@"address.geo.lng"] floatValue]];
-   
+    user.company = company;
 }
 
 - (void) fetchAllCompaniesWithCompletitionBlock:(void (^)(NSArray *))block
@@ -257,23 +258,15 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
         
-        NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        moc.parentContext = [[CoreDataManager sharedManager] mainContext];
+//        NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+//        moc.parentContext = [[CoreDataManager sharedManager] mainContext];
         
+        NSManagedObjectContext *moc = self.moc;
         
-        NSFetchRequest *request = [[NSFetchRequest alloc] init];
-        NSEntityDescription *description = [NSEntityDescription entityForName:@"Company" inManagedObjectContext:moc];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", [user objectForKey:@"company"]];
-        [request setEntity:description];
-        [request setResultType:NSManagedObjectResultType];
-        [request setPredicate:predicate];
-        NSError *error = nil;
-        NSArray *obj = [moc executeFetchRequest:request error:&error];
-        Company *currentCompany;
-        if (!error)
-        {
-            currentCompany = (Company *)obj[0];
-        }
+        NSString *comapnyName = [user objectForKey:@"company"];
+        
+        Company *currentCompany = [self fetchCompanyByName:comapnyName];
+        
         UserData *newUser = [NSEntityDescription insertNewObjectForEntityForName:@"UserData" inManagedObjectContext:moc];
         newUser.name = [user objectForKey:@"name"];
         newUser.userName = [user objectForKey:@"userName"];
@@ -305,6 +298,27 @@
 
 }
 
+- (Company *) fetchCompanyByName:(NSString *)name
+{
+//    NSManagedObjectContext *moc = [[CoreDataManager sharedManager] mainContext];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *description = [NSEntityDescription entityForName:@"Company" inManagedObjectContext:self.moc];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", name];
+    [request setEntity:description];
+    [request setResultType:NSManagedObjectResultType];
+    [request setPredicate:predicate];
+    NSError *error = nil;
+    NSArray *obj = [self.moc executeFetchRequest:request error:&error];
+    Company *currentCompany;
+    if (!error)
+    {
+        currentCompany = (Company *)obj[0];
+    }
+    
+    return currentCompany;
+}
+
 - (BOOL)commitChangesForUser:(UserData *)user
 {
     BOOL result;
@@ -330,7 +344,7 @@
 {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
-        
+//        NSManagedObjectContext *moc = self.coreDataManager.mainContext;
         NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         moc.parentContext = [CoreDataManager sharedManager].mainContext;
         
@@ -342,11 +356,11 @@
         NSArray *companies = [moc executeFetchRequest:companyRequest error:&error];
         
         
-        NSManagedObjectContext *mocUser = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        mocUser.parentContext = [CoreDataManager sharedManager].mainContext;
+//        NSManagedObjectContext *mocUser = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+//        mocUser.parentContext = [CoreDataManager sharedManager].mainContext;
         
         NSFetchRequest *userRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *desc = [NSEntityDescription entityForName:@"UserData" inManagedObjectContext:mocUser];
+        NSEntityDescription *desc = [NSEntityDescription entityForName:@"UserData" inManagedObjectContext:moc];
         [userRequest setEntity:desc];
         
         NSArray *allUsers = [moc executeFetchRequest:userRequest error:nil];

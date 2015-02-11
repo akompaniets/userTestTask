@@ -13,9 +13,10 @@
 #import <RKDropdownAlert/RKDropdownAlert.h>
 #import "MainModel.h"
 #import "Company.h"
+#import "RouteController.h"
 
 
-@interface UserDetailViewController () <UIAlertViewDelegate>
+@interface UserDetailViewController () <UIAlertViewDelegate, MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *userDetailView;
 @property (weak, nonatomic) IBOutlet UIImageView *userViewBackground;
@@ -77,14 +78,13 @@
     
     if (CLLocationCoordinate2DIsValid(coord)) {
         [self.mapView addAnnotation:userAnnotation];
-        [self.mapView setCenterCoordinate:coord animated:YES];
+//        [self.mapView setCenterCoordinate:coord animated:NO];
     }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void) addTargetForTextField:(UITextField *)textField
@@ -237,6 +237,47 @@
         default:
             break;
     }
+}
+
+- (void) showRoute:(UIButton *)button
+{
+    RouteController *routeVC = [[self storyboard] instantiateViewControllerWithIdentifier:@"routeController"];
+    CLLocationCoordinate2D coord;
+    coord.latitude = (CLLocationDegrees)[self.currentUser.lat doubleValue];
+    coord.longitude = (CLLocationDegrees)[self.currentUser.lng doubleValue];
+    
+    routeVC.destinationCoord = coord;
+    
+    [self presentViewController:routeVC animated:YES completion:nil];
+}
+
+#pragma mark - MKMapViewDelegate
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil;
+    }
+    
+    static NSString *pinID = @"pinID";
+    
+    MKPinAnnotationView *pin = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:pinID];
+    if (!pin) {
+        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pinID];
+
+        pin.canShowCallout = YES;
+        pin.animatesDrop = YES;
+        
+    }else{
+        pin.annotation = annotation;
+    }
+
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        [button addTarget:self action:@selector(showRoute:) forControlEvents:UIControlEventTouchUpInside];
+        pin.rightCalloutAccessoryView = button;
+    [mapView setCenterCoordinate:pin.annotation.coordinate animated:YES];
+    
+    return pin;
 }
 
 
