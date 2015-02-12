@@ -42,11 +42,9 @@
     dispatch_async(queue, ^{
         
         CGFloat appVersion = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] floatValue];
-        if (appVersion == 2.0 && !isSynchronizedDB)
+        if (appVersion == 2.0 && !isSynchronizedDB && !isFirstRun)
         {
             [self synchronizeDataBase];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSyncDB];
-            [[NSUserDefaults standardUserDefaults] synchronize];
         }
         
         if (!self.networkManager && !self.coreDataManager) {
@@ -344,7 +342,7 @@
 {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
-//        NSManagedObjectContext *moc = self.coreDataManager.mainContext;
+
         NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         moc.parentContext = [CoreDataManager sharedManager].mainContext;
         
@@ -354,10 +352,6 @@
         
         NSError *error = nil;
         NSArray *companies = [moc executeFetchRequest:companyRequest error:&error];
-        
-        
-//        NSManagedObjectContext *mocUser = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-//        mocUser.parentContext = [CoreDataManager sharedManager].mainContext;
         
         NSFetchRequest *userRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *desc = [NSEntityDescription entityForName:@"UserData" inManagedObjectContext:moc];
@@ -380,13 +374,12 @@
             NSError *error = nil;
             [moc save:&error];
         }];
-//        
-//        [mocUser performBlockAndWait:^{
-//            NSError *error = nil;
-//            [mocUser save:&error];
-//        }];
         
-        [[CoreDataManager sharedManager] saveContext];
+        if ([[CoreDataManager sharedManager] saveContext])
+        {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSyncDB];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
     });
 }
 

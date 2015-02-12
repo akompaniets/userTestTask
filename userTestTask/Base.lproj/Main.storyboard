@@ -850,7 +850,7 @@
     </scenes>
     <resources>
         <image name="background" width="320" height="568"/>
-        <image name="company" width="32" height="30"/>
-        <image name="users" width="32" height="32"/>
+        <image name="company" width="24" height="23"/>
+        <image name="users" width="24" height="24"/>
     </resources>
 </document>

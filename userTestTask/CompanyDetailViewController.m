@@ -56,6 +56,7 @@
 - (void) configureCell:(UITableViewCell *)cell forIndexPah:(NSIndexPath *)indexPath
 {
     UserData *user = users[indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.text = user.name;
 }
 
