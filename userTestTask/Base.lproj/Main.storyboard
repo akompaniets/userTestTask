@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RVQ-Cf-Gub">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bM8-hn-CbA">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -191,6 +191,85 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1h-di-xcO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1018" y="69"/>
+        </scene>
+        <!--Test Controller-->
+        <scene sceneID="oNX-KD-rBm">
+            <objects>
+                <viewController id="bM8-hn-CbA" customClass="TestController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QtE-B8-HaZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="5TE-kb-yi7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="91B-1B-VW5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xkM-GO-s6z">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <connections>
+                                    <outlet property="delegate" destination="bM8-hn-CbA" id="WfI-Zg-Asd"/>
+                                </connections>
+                            </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5qF-ms-nBc">
+                                <rect key="frame" x="196" y="28" width="209" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="209" id="mf0-Nr-IN5"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Standard"/>
+                                    <segment title="Sattelite"/>
+                                    <segment title="Hybrid"/>
+                                </segments>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="changeMapType:" destination="bM8-hn-CbA" eventType="valueChanged" id="6dL-X0-EZ8"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eow-2x-0qd" userLabel="AddNewPin">
+                                <rect key="frame" x="425" y="31" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="EYs-RR-DQx"/>
+                                    <constraint firstAttribute="width" constant="22" id="tEC-xH-LMg"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="addPin:" destination="bM8-hn-CbA" eventType="touchUpInside" id="Z4A-nh-LKI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qbb-Sk-hA5" userLabel="ShowAll">
+                                <rect key="frame" x="154" y="31" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="22" id="EKL-F1-CFX"/>
+                                    <constraint firstAttribute="height" constant="22" id="osM-fX-m4P"/>
+                                </constraints>
+                                <state key="normal" image="search"/>
+                                <connections>
+                                    <action selector="showAllPin:" destination="bM8-hn-CbA" eventType="touchUpInside" id="B8h-Mr-oah"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Eow-2x-0qd" firstAttribute="top" secondItem="QtE-B8-HaZ" secondAttribute="bottom" constant="11" id="0ok-2I-KDK"/>
+                            <constraint firstItem="5TE-kb-yi7" firstAttribute="top" secondItem="xkM-GO-s6z" secondAttribute="bottom" id="2CA-Ic-dgE"/>
+                            <constraint firstItem="xkM-GO-s6z" firstAttribute="top" secondItem="91B-1B-VW5" secondAttribute="top" id="2OR-MD-O01"/>
+                            <constraint firstItem="Qbb-Sk-hA5" firstAttribute="top" secondItem="QtE-B8-HaZ" secondAttribute="bottom" constant="11" id="8HS-s6-gI0"/>
+                            <constraint firstItem="5qF-ms-nBc" firstAttribute="top" secondItem="QtE-B8-HaZ" secondAttribute="bottom" constant="8" id="FLL-Zc-srA"/>
+                            <constraint firstItem="5qF-ms-nBc" firstAttribute="leading" secondItem="Qbb-Sk-hA5" secondAttribute="trailing" constant="20" id="Ia1-dK-c28"/>
+                            <constraint firstAttribute="trailing" secondItem="xkM-GO-s6z" secondAttribute="trailing" id="hSx-as-Yoi"/>
+                            <constraint firstAttribute="centerX" secondItem="5qF-ms-nBc" secondAttribute="centerX" id="qGC-LR-o37"/>
+                            <constraint firstItem="xkM-GO-s6z" firstAttribute="leading" secondItem="91B-1B-VW5" secondAttribute="leading" id="rrh-eR-NbT"/>
+                            <constraint firstItem="Eow-2x-0qd" firstAttribute="leading" secondItem="5qF-ms-nBc" secondAttribute="trailing" constant="20" id="zAA-Zn-btL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapTypeControl" destination="5qF-ms-nBc" id="yRp-dO-M3r"/>
+                        <outlet property="mapView" destination="xkM-GO-s6z" id="OR0-Qt-8np"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Smg-f9-Z0H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-670" y="-1264"/>
         </scene>
         <!--Companies-->
         <scene sceneID="taa-d9-qfS">
@@ -851,6 +930,7 @@
     <resources>
         <image name="background" width="320" height="568"/>
         <image name="company" width="24" height="23"/>
+        <image name="search" width="24" height="24"/>
         <image name="users" width="24" height="24"/>
     </resources>
 </document>

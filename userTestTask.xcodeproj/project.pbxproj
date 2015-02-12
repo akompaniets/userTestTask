@@ -35,6 +35,8 @@
 		DF8F891C1A850E6D00D55795 /* CompanyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8F891A1A850E6D00D55795 /* CompanyCell.m */; };
 		DF8F89201A8522DE00D55795 /* CompanyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8F891F1A8522DE00D55795 /* CompanyDetailViewController.m */; };
 		DFA8CEDD1A7A7ABC00927416 /* Defines.m in Sources */ = {isa = PBXBuildFile; fileRef = DFA8CEDC1A7A7ABC00927416 /* Defines.m */; };
+		DFB45FF01A8CDF98006ED0E6 /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB45FEF1A8CDF98006ED0E6 /* TestController.m */; };
+		DFB45FF51A8CE86F006ED0E6 /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB45FF41A8CE86F006ED0E6 /* MyAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +106,10 @@
 		DF8F891E1A8522DE00D55795 /* CompanyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyDetailViewController.h; sourceTree = "<group>"; };
 		DF8F891F1A8522DE00D55795 /* CompanyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyDetailViewController.m; sourceTree = "<group>"; };
 		DFA8CEDC1A7A7ABC00927416 /* Defines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Defines.m; sourceTree = "<group>"; };
+		DFB45FEE1A8CDF98006ED0E6 /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
+		DFB45FEF1A8CDF98006ED0E6 /* TestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestController.m; sourceTree = "<group>"; };
+		DFB45FF31A8CE86F006ED0E6 /* MyAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotation.h; sourceTree = "<group>"; };
+		DFB45FF41A8CE86F006ED0E6 /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +159,7 @@
 				49E874661A387B3800E2A1C8 /* AddNewUserViewController.m */,
 				DF6B9B731A8A14D400064084 /* RouteController.h */,
 				DF6B9B741A8A14D400064084 /* RouteController.m */,
+				DFB45FF21A8CDFB2006ED0E6 /* Test */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -270,6 +277,17 @@
 				DF6B9B6E1A88E2D800064084 /* Company.m */,
 			);
 			name = CoreData;
+			sourceTree = "<group>";
+		};
+		DFB45FF21A8CDFB2006ED0E6 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				DFB45FEE1A8CDF98006ED0E6 /* TestController.h */,
+				DFB45FEF1A8CDF98006ED0E6 /* TestController.m */,
+				DFB45FF31A8CE86F006ED0E6 /* MyAnnotation.h */,
+				DFB45FF41A8CE86F006ED0E6 /* MyAnnotation.m */,
+			);
+			name = Test;
 			sourceTree = "<group>";
 		};
 		F0B65D686738D72808C3B26A /* Frameworks */ = {
@@ -432,6 +450,7 @@
 				DF6B9B591A88D4D300064084 /* userTestTask.xcdatamodeld in Sources */,
 				DF8F89201A8522DE00D55795 /* CompanyDetailViewController.m in Sources */,
 				49E874671A387B3800E2A1C8 /* AddNewUserViewController.m in Sources */,
+				DFB45FF51A8CE86F006ED0E6 /* MyAnnotation.m in Sources */,
 				49E8746D1A388CD500E2A1C8 /* UserCell.m in Sources */,
 				DFA8CEDD1A7A7ABC00927416 /* Defines.m in Sources */,
 				49E8747A1A38BC4E00E2A1C8 /* MainModel.m in Sources */,
@@ -440,6 +459,7 @@
 				DF6B9B751A8A14D400064084 /* RouteController.m in Sources */,
 				49E8747D1A38BCFB00E2A1C8 /* NetworkManager.m in Sources */,
 				49E8743C1A3864E200E2A1C8 /* main.m in Sources */,
+				DFB45FF01A8CDF98006ED0E6 /* TestController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
