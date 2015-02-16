@@ -21,8 +21,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setupAppearance];
-
+    
     return YES;
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

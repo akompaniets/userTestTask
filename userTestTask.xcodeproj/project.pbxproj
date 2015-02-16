@@ -37,6 +37,7 @@
 		DFA8CEDD1A7A7ABC00927416 /* Defines.m in Sources */ = {isa = PBXBuildFile; fileRef = DFA8CEDC1A7A7ABC00927416 /* Defines.m */; };
 		DFB45FF01A8CDF98006ED0E6 /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB45FEF1A8CDF98006ED0E6 /* TestController.m */; };
 		DFB45FF51A8CE86F006ED0E6 /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB45FF41A8CE86F006ED0E6 /* MyAnnotation.m */; };
+		DFD324061A91FB0C00E708F2 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD324051A91FB0C00E708F2 /* Student.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,8 @@
 		DFB45FEF1A8CDF98006ED0E6 /* TestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestController.m; sourceTree = "<group>"; };
 		DFB45FF31A8CE86F006ED0E6 /* MyAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotation.h; sourceTree = "<group>"; };
 		DFB45FF41A8CE86F006ED0E6 /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
+		DFD324041A91FB0C00E708F2 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		DFD324051A91FB0C00E708F2 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +289,8 @@
 				DFB45FEF1A8CDF98006ED0E6 /* TestController.m */,
 				DFB45FF31A8CE86F006ED0E6 /* MyAnnotation.h */,
 				DFB45FF41A8CE86F006ED0E6 /* MyAnnotation.m */,
+				DFD324041A91FB0C00E708F2 /* Student.h */,
+				DFD324051A91FB0C00E708F2 /* Student.m */,
 			);
 			name = Test;
 			sourceTree = "<group>";
@@ -450,6 +455,7 @@
 				DF6B9B591A88D4D300064084 /* userTestTask.xcdatamodeld in Sources */,
 				DF8F89201A8522DE00D55795 /* CompanyDetailViewController.m in Sources */,
 				49E874671A387B3800E2A1C8 /* AddNewUserViewController.m in Sources */,
+				DFD324061A91FB0C00E708F2 /* Student.m in Sources */,
 				DFB45FF51A8CE86F006ED0E6 /* MyAnnotation.m in Sources */,
 				49E8746D1A388CD500E2A1C8 /* UserCell.m in Sources */,
 				DFA8CEDD1A7A7ABC00927416 /* Defines.m in Sources */,

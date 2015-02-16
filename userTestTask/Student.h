@@ -1,18 +1,19 @@
 //
-//  NyAnnotation.m
+//  Student.h
 //  userTestTask
 //
-//  Created by Mobindustry on 2/12/15.
+//  Created by Mobindustry on 2/16/15.
 //  Copyright (c) 2015 ARC. All rights reserved.
 //
 
-#import "MyAnnotation.h"
+#import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+
 typedef NS_ENUM(NSInteger, Gender){
     Male    = 0,
     Female  = 1 };
 
-
-@interface Student
+@interface Student : NSObject
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *surname;
@@ -21,21 +22,5 @@ typedef NS_ENUM(NSInteger, Gender){
 @property (assign, nonatomic) CLLocationCoordinate2D coordinate;
 @property (strong, nonatomic) NSString *adress;
 
-@end
-@implementation MyAnnotation
-
-- (id) initWithTitle:(NSString *)title subTitle:(NSString *)subTitle coordinate:(CLLocationCoordinate2D)coordinates
-{
-    self = [super init];
-    if (self) {
-        self.title = title;
-        self.subtitle = subTitle;
-        self.coordinate = coordinates;
-        
-        return self;
-    }
-    
-    return nil;
-}
-
++ (Student *)generateRandonStudent;
 @end

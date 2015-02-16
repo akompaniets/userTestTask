@@ -9,27 +9,70 @@
 #import "TestController.h"
 #import <MapKit/MapKit.h>
 #import "MyAnnotation.h"
+#import "Student.h"
+
+
 
 @interface TestController () <MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mapTypeControl;
 
+@property (strong, nonatomic) NSMutableSet *coordinates;
+
 @end
 
 @implementation TestController
 
 - (void)viewDidLoad {
+   
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    Student *student = [Student generateRandonStudent];
+    
 }
+
+//- (void)viewDidAppear:(BOOL)animated{
+//    [super viewDidAppear:animated];
+//    
+//    CLLocationCoordinate2D myCoordinate = self.mapView.userLocation.location.coordinate;
+//    [self.mapView setCenterCoordinate:myCoordinate animated:YES];
+//    
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+
+- (Student *)generateRandomStudent {
+    
+    Student *student = [[Student alloc] init];
+ 
+    
+        
+      CLLocation  *currentLocation = [[CLLocation alloc] initWithLatitude:29.33891 longitude:48.077202];
+        
+//        CGFloat latitude=[[d valueForKey:@"latitude"] floatValue];
+//        CGFloat longitude=[[d valueForKey:@"longitude"] floatValue];
+//        CLLocation *newPinLocation=[[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+//        double distanceValue=[currentLocation distanceFromLocation:newPinLocation];
+//        
+    
+    
+    
+    
+    return student;
+}
+
 #pragma mark - Actions
+
+-(NSMutableSet *)coordinates{
+    if (_coordinates) {
+        _coordinates = [[NSMutableSet alloc] init];
+    }
+    return _coordinates;
+}
 
 - (IBAction)changeMapType:(UISegmentedControl *)sender {
     
@@ -58,8 +101,14 @@
     MyAnnotation *annotation = [[MyAnnotation alloc] initWithTitle:@"Test"
                                                           subTitle:@"Subtitle"
                                                        coordinate:coordinate];
-    
-    [self.mapView addAnnotation:annotation];
+    NSValue *value = [NSValue valueWithMKCoordinate:coordinate];
+    [self.coordinates addObject:value];
+  
+    if ([self.coordinates containsObject:value]) {
+        return;
+    }else{
+        [self.mapView addAnnotation:annotation];
+    }
 }
 
 - (void) setSegmentedControlAlpha:(CGFloat)alpha
@@ -79,7 +128,7 @@
     for (id <MKAnnotation> annotation in self.mapView.annotations) {
         CLLocationCoordinate2D location = annotation.coordinate;
         MKMapPoint center = MKMapPointForCoordinate(location);
-        double delta = 20000;
+        double delta = 50000;
         
         MKMapRect rect = MKMapRectMake(center.x - delta, center.y - delta, delta * 2, delta * 2);
         
@@ -99,13 +148,13 @@
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
 {
-    [self setSegmentedControlAlpha:0.0f];
+//    [self setSegmentedControlAlpha:0.0f];
     NSLog(@"regionWillChangeAnimated");
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
-    [self setSegmentedControlAlpha:1.0f];
+//    [self setSegmentedControlAlpha:1.0f];
     NSLog(@"regionDidChangeAnimated");
 }
 
@@ -132,6 +181,11 @@
 
     
     return pin;
+}
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+    
+    [mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
 }
 
 //- (void)mapViewWillStartLoadingMap:(MKMapView *)mapView

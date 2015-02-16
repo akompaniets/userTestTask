@@ -124,16 +124,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "userTestTask/TestController.m"
-            timestampString = "445443947.492679"
+            timestampString = "445795067.397571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "-changeMapType:"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "-addPin:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -144,12 +144,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "userTestTask/TestController.m"
-            timestampString = "445449598.183203"
+            timestampString = "445795043.326113"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "-mapView:viewForAnnotation:"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
