@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "MyAnnotation.h"
 #import "Student.h"
+#import <CoreLocation/CoreLocation.h>
 
 
 
@@ -24,11 +25,35 @@
 
 @implementation TestController
 
+{
+    NSMutableArray *annotations;
+    NSMutableArray *students;
+}
+
 - (void)viewDidLoad {
    
     [super viewDidLoad];
-    Student *student = [Student generateRandonStudent];
+    annotations = [NSMutableArray array];
+    students = [NSMutableArray array];
+    for (int a = 0; a < 10; a++) {
+        
+        Student *student = [Student generateRandonStudent];
+        MyAnnotation *annotation = [[MyAnnotation alloc] initWithTitle:student.name
+                                                              subTitle:student.surname
+                                                                gender:student.gender
+                                                            coordinate:student.coordinate];
+        [students addObject:student];
+        [annotations addObject:annotation];
+        
+    }
     
+    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(48.464246, 35.045945);
+    CCLocation *loc1 = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
+    CLLocationDistance distance = [loc1 distanceFromLocation:<#(const CLLocation *)#>]
+    MKMapRect rect = MKMapRectM
+    self.mapView setVisibleMapRect:<#(MKMapRect)#>
+    MKCircle *circle = [MKCircle circleWithCenterCoordinate:coord radius:1000];
+    [self.mapView addOverlay:circle];
 }
 
 //- (void)viewDidAppear:(BOOL)animated{
@@ -97,18 +122,8 @@
 
 - (IBAction)addPin:(id)sender
 {
-    CLLocationCoordinate2D coordinate = self.mapView.region.center;
-    MyAnnotation *annotation = [[MyAnnotation alloc] initWithTitle:@"Test"
-                                                          subTitle:@"Subtitle"
-                                                       coordinate:coordinate];
-    NSValue *value = [NSValue valueWithMKCoordinate:coordinate];
-    [self.coordinates addObject:value];
-  
-    if ([self.coordinates containsObject:value]) {
-        return;
-    }else{
-        [self.mapView addAnnotation:annotation];
-    }
+    [self.mapView showAnnotations:annotations animated:YES];
+//    [self.mapView addAnnotations:annotations];
 }
 
 - (void) setSegmentedControlAlpha:(CGFloat)alpha
@@ -170,7 +185,12 @@
     MKPinAnnotationView *pin = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:pinID];
     if (!pin) {
         pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pinID];
-        pin.image = [UIImage imageNamed:@"pin"];
+        MyAnnotation *ann = (MyAnnotation *)annotation;
+        if (ann.isMale) {
+            pin.image = [UIImage imageNamed:@"man"];
+        }else{
+            pin.image = [UIImage imageNamed:@"woman"];
+        }
         pin.animatesDrop = YES;
         pin.canShowCallout = YES;
         pin.draggable = YES;
@@ -183,44 +203,17 @@
     return pin;
 }
 
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay {
+    
+    MKCircleView *circleView = [[MKCircleView alloc] initWithOverlay:overlay];
+    circleView.strokeColor = [UIColor redColor];
+    circleView.fillColor = [[UIColor redColor] colorWithAlphaComponent:0.4];
+    return circleView;
+}
+
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
     
-    [mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
+//    [mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
 }
-
-//- (void)mapViewWillStartLoadingMap:(MKMapView *)mapView
-//{
-//    NSLog(@"mapViewWillStartLoadingMap");
-//}
-//
-//- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
-//{
-//    NSLog(@"mapViewDidFinishLoadingMap");
-//}
-//
-//- (void)mapViewDidFailLoadingMap:(MKMapView *)mapView withError:(NSError *)error
-//{
-//    NSLog(@"mapViewDidFailLoadingMap");
-//}
-//
-//- (void)mapViewWillStartRenderingMap:(MKMapView *)mapView
-//{
-//    NSLog(@"mapViewWillStartRenderingMap");
-//}
-//
-//- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
-//{
-//    NSLog(@"mapViewDidFinishRenderingMap");
-//}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

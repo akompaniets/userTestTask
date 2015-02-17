@@ -15,5 +15,7 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
 
-- (id)initWithTitle:(NSString *)title subTitle:(NSString *)subTitle coordinate:(CLLocationCoordinate2D)coordinates;
+@property (nonatomic, assign, getter=isMale) BOOL male;
+
+- (id)initWithTitle:(NSString *)title subTitle:(NSString *)subTitle gender:(BOOL)male coordinate:(CLLocationCoordinate2D)coordinates;
 @end

@@ -24,13 +24,14 @@ typedef NS_ENUM(NSInteger, Gender){
 @end
 @implementation MyAnnotation
 
-- (id) initWithTitle:(NSString *)title subTitle:(NSString *)subTitle coordinate:(CLLocationCoordinate2D)coordinates
+- (id) initWithTitle:(NSString *)title subTitle:(NSString *)subTitle gender:(BOOL)male coordinate:(CLLocationCoordinate2D)coordinates
 {
     self = [super init];
     if (self) {
         self.title = title;
         self.subtitle = subTitle;
         self.coordinate = coordinates;
+        self.male = male;
         
         return self;
     }

@@ -13,7 +13,7 @@ static NSString *surnames[] = {@"Macak", @"Brauswein",@"Pulten",@"Brenson",@"Wan
 
 @implementation Student
 
-+(Student *)generateRandonStudent {
++ (Student *)generateRandonStudent {
     
     Student *student = [[self alloc] init];
     
@@ -21,8 +21,13 @@ static NSString *surnames[] = {@"Macak", @"Brauswein",@"Pulten",@"Brenson",@"Wan
     student.name = names[arc4random_uniform(13)];
     student.surname = surnames[arc4random_uniform(13)];
     student.dateOfBirth = [NSDate dateWithTimeIntervalSince1970:60 * 60 * 24 * 365 * arc4random_uniform(35)];
-    student.coordinate = CLLocationCoordinate2DMake(48.464246, 35.045945);
     
+    
+    double latitude = (((double)arc4random()/0x100000000)*(46.974075-46.946091) + 46.946091);
+    double longitude = (((double)arc4random()/0x100000000)*(32.029097-31.965391) + 31.965391);
+    
+    student.coordinate = CLLocationCoordinate2DMake(48.464246, 35.045945);
+
     
     return student;
     
