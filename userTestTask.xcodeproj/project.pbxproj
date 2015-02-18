@@ -38,6 +38,7 @@
 		DFB45FF01A8CDF98006ED0E6 /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB45FEF1A8CDF98006ED0E6 /* TestController.m */; };
 		DFB45FF51A8CE86F006ED0E6 /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB45FF41A8CE86F006ED0E6 /* MyAnnotation.m */; };
 		DFD324061A91FB0C00E708F2 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD324051A91FB0C00E708F2 /* Student.m */; };
+		DFD324131A94F2E700E708F2 /* UIView+MKAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD324121A94F2E700E708F2 /* UIView+MKAnnotationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,8 @@
 		DFB45FF41A8CE86F006ED0E6 /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
 		DFD324041A91FB0C00E708F2 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
 		DFD324051A91FB0C00E708F2 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
+		DFD324111A94F2E700E708F2 /* UIView+MKAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MKAnnotationView.h"; sourceTree = "<group>"; };
+		DFD324121A94F2E700E708F2 /* UIView+MKAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MKAnnotationView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +292,8 @@
 				DFB45FEF1A8CDF98006ED0E6 /* TestController.m */,
 				DFB45FF31A8CE86F006ED0E6 /* MyAnnotation.h */,
 				DFB45FF41A8CE86F006ED0E6 /* MyAnnotation.m */,
+				DFD324111A94F2E700E708F2 /* UIView+MKAnnotationView.h */,
+				DFD324121A94F2E700E708F2 /* UIView+MKAnnotationView.m */,
 				DFD324041A91FB0C00E708F2 /* Student.h */,
 				DFD324051A91FB0C00E708F2 /* Student.m */,
 			);
@@ -462,6 +467,7 @@
 				49E8747A1A38BC4E00E2A1C8 /* MainModel.m in Sources */,
 				49E874451A3864E200E2A1C8 /* MainViewController.m in Sources */,
 				49E874641A387B0D00E2A1C8 /* UserDetailViewController.m in Sources */,
+				DFD324131A94F2E700E708F2 /* UIView+MKAnnotationView.m in Sources */,
 				DF6B9B751A8A14D400064084 /* RouteController.m in Sources */,
 				49E8747D1A38BCFB00E2A1C8 /* NetworkManager.m in Sources */,
 				49E8743C1A3864E200E2A1C8 /* main.m in Sources */,

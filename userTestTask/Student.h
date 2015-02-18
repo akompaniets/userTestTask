@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, Gender){
 @property (assign, nonatomic) NSDate *dateOfBirth;
 @property (assign, nonatomic) Gender gender;
 @property (assign, nonatomic) CLLocationCoordinate2D coordinate;
-@property (strong, nonatomic) NSString *adress;
+@property (strong, nonatomic) NSString *address;
 
-+ (Student *)generateRandonStudent;
+- (instancetype)initWithRandomData;
 @end
