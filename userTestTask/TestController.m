@@ -16,7 +16,6 @@
 @interface TestController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *mapTypeControl;
 
 @property (strong, nonatomic) NSMutableSet *coordinates;
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -80,40 +79,13 @@
     return _coordinates;
 }
 
-- (IBAction)changeMapType:(UISegmentedControl *)sender {
-    
-    switch (sender.selectedSegmentIndex) {
-        case 0:
-            self.mapView.mapType = MKMapTypeStandard;
-            break;
-            
-        case 1:
-            self.mapView.mapType = MKMapTypeSatellite;
-            break;
-            
-        case 2:
-            self.mapView.mapType = MKMapTypeHybrid;
-            break;
-            
-        default:
-            break;
-    }
-    
-}
 
 - (IBAction)addPin:(id)sender
 {
-    [self.mapView showAnnotations:annotations animated:YES];
+//    [self.mapView showAnnotations:annotations animated:YES];
 //    [self.mapView addAnnotations:annotations];
 }
 
-- (void) setSegmentedControlAlpha:(CGFloat)alpha
-{
-    [UIView animateWithDuration:0.3f animations:^{
-        self.mapTypeControl.alpha = alpha;
-        [self.view layoutIfNeeded];
-    }];
-}
 
 -(IBAction)showAllPin:(id)sender
 {
@@ -144,13 +116,11 @@
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
 {
-//    [self setSegmentedControlAlpha:0.0f];
     NSLog(@"regionWillChangeAnimated");
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
-//    [self setSegmentedControlAlpha:1.0f];
     NSLog(@"regionDidChangeAnimated");
 }
 

@@ -22,6 +22,6 @@
 #define CLCOORDINATES_EQUAL( coord1, coord2 ) (fabs(coord1.latitude - coord2.latitude) < CLCOORDINATE_EPSILON && fabs(coord1.longitude - coord2.longitude) < CLCOORDINATE_EPSILON)
 
 
-FOUNDATION_EXPORT NSString * kBaseURL;
-FOUNDATION_EXPORT NSInteger kDefaultUserID;
-FOUNDATION_EXPORT NSString * kCurrentLocationDidUpdateNotification;
+FOUNDATION_EXPORT NSString * BaseURL;
+FOUNDATION_EXPORT NSInteger DefaultUserID;
+FOUNDATION_EXPORT NSString * CurrentLocationDidUpdateNotification;

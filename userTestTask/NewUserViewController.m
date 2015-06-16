@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 ARC. All rights reserved.
 //
 
-#import "AddNewUserViewController.h"
+#import "NewUserViewController.h"
 #import "CoreDataManager.h"
 #import "UserData.h"
 #import <CoreLocation/CoreLocation.h>
 #import <RKDropdownAlert/RKDropdownAlert.h>
 #import "MainModel.h"
 
-@interface AddNewUserViewController () <CLLocationManagerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
+@interface NewUserViewController () <CLLocationManagerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *regViewTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pickerBottomConstraint;
@@ -36,7 +36,7 @@
 
 @end
 
-@implementation AddNewUserViewController
+@implementation NewUserViewController
 {
     NSArray *companyNames;
     NSInteger selectedRow;
@@ -130,6 +130,10 @@
 - (IBAction)cancelButtonPressed:(id)sender
 {
     [self hideRegistrationView];
+    [self.userNameField resignFirstResponder];
+    [self.nameField resignFirstResponder];
+    [self.phoneNumberField resignFirstResponder];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -153,8 +157,8 @@
         NSDictionary *newUser = @{@"name" : self.nameField.text,
                                   @"userName" : self.userNameField.text,
                                   @"phone" : self.phoneNumberField.text,
-                                  @"lat" : self.lat,
-                                  @"lng" : self.lng};
+                                  @"lat" : [NSNumber numberWithDouble:50.470690],
+                                  @"lng" : [NSNumber numberWithDouble:30.521711]};
         
     
         [self.userData addEntriesFromDictionary:newUser];

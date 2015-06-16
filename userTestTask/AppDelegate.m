@@ -21,7 +21,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setupAppearance];
-    
+    NSLog(@"%@", [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
+//    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"HasLaunchedForVersion"] < currentVersion) {
+//        
+//        [[NSUserDefaults standardUserDefaults] setInteger:currentVersion forKey:@"HasLaunchedForVersion"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//        // This is the first launch for this version
+//        
+//    }
+    CGFloat appVersion = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] floatValue];
+//    [NSUserDefaults standardUserDefaults]
+    NSLog(@"Info %@",[[NSBundle mainBundle] infoDictionary] );
     return YES;
     
 }
@@ -44,6 +54,8 @@
                                                            CUSTOM_FONT, NSFontAttributeName, nil]];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
+
 }
 
 

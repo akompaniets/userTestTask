@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocationDidUpdate:) name:kCurrentLocationDidUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocationDidUpdate:) name:CurrentLocationDidUpdateNotification object:nil];
     [self getCurrentLocation];
 
     
@@ -121,7 +121,7 @@
      [self.locationManager stopUpdatingLocation];
     self.currentCoord = newLocation.coordinate;
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:kCurrentLocationDidUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:CurrentLocationDidUpdateNotification object:nil];
    
 }
 

@@ -17,5 +17,5 @@
 
 @property (nonatomic, assign, getter=isMale) BOOL male;
 
-- (id)initWithTitle:(NSString *)title subTitle:(NSString *)subTitle gender:(BOOL)male coordinate:(CLLocationCoordinate2D)coordinates;
+- (instancetype)initWithTitle:(NSString *)title subTitle:(NSString *)subTitle gender:(BOOL)male coordinate:(CLLocationCoordinate2D)coordinates;
 @end
